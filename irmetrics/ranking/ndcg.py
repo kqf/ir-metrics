@@ -1,10 +1,10 @@
 import numpy as np
 
 
-def dcg_score(ranking, at=None):
+def dcg_score(ranking, at=None, weights=1.0):
     target = ranking if at is None else ranking[:at]
     gains = (2 ** target - 1) / np.log2(np.arange(target.size) + 2)
-    return np.sum(gains)
+    return np.sum(gains * weights)
 
 
 def ndcg_score(ranking, at=None):
