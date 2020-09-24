@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 import pandas as pd
-from irmetrics.ranking.wdcg import wdcg_score, mean_wdcg_score
+from irmetrics.ranking import wdcg_score, mean_wdcg_score
 
 
 EXAMPLES = [

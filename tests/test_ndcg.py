@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from irmetrics.ranking.ndcg import ndcg_score
+from irmetrics.ranking import ndcg_score
 
 
 EXAMPLES = [
