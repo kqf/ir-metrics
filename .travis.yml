@@ -10,12 +10,20 @@ script:
   - pytest
 
 deploy:
-  provider: pypi
+  provider: pypi  # test deploys
   user: "__token__"  
-  server: https://test.pypi.org/legacy/  # test deploys
+  server: https://test.pypi.org/legacy/
   password:
     secure: "b0h+0q0BRpx7wpKsrpq/H9vSjfCQWDqTwlX44sjm0m9I/r2myv0a7ywWe+/kLPWXAz8IwH1y2nPxZimaiYW0WUA5WkEsxcQ13fXcEWB3i/9uV7OhMDE7O6TfZqysXULt/8ePkdzL6VhIE90sF4gdEaeZmijPsVWv/qsi4Vcb6DRHcUIlmFwiLHFz6McnYuMFBJSyCfHt/eb6KBDetmEWb5FoAb7txsEYqLc9YkNDvl2UKZS5sAX352WkjpYXGCepR8p1ZgjhBdKlcxiWQ21bC49NneTIPkyfjzbl1WJm4KhoBH3hUfRX5Lx0M5CLn2Ht5ZDMnhuEycAP/c5ttuIMB+0KBQOW3CYImu7kI6OI27U2xR3QmRvs/74yHfQaMTXS6vcMqL2rQ1StiNXyC2jXXdoZn4RhIdo+tdW415JmA12UXZWA5tf5x3JXBp4RXX9C9CuzQPAQf2ZeJkgPGLl++DpttXjkxCnGsSDcPpTuaBtaunT2F8pPQxtbGoEZnTe2uMryXJSMbbT2PglUhZR15LRz1yJcmIyxDt0LGJZQqM5hp35rk944RwkeoCfLvFQOa0TOgFIfZ/QwOLZCSpvDhfn4MpL9FJea6/m6zpY2kL9kownCpKZzjVRzPfGTxgqKhBemPwp8WgZGbVba4sxSd+wTTaTCYwOQrB0VVUzzqgQ=" # test deploys
-    # secure: "luNqbrMV3//GbAlfq4E4zQqDB5JcOhzUOiWhA7fzTFnylYZ9nqeDzo6PcMp+ovfY5W7O7MZ1aimMPSMPdDVFJTCFuPknzcFhyaQDMLgkdPOub8Dx0/01VGbmUDQmSos7MWhGIVAaSjBdl75sBKELEkETmpZ93Gzwg76XUw+yP73MyxRVgLmlPJQuoAxqtMQ+y0ply+VA3pcUlTtIpXTUWUo0oWSG6tqf7uJj0emKm6qJDJ4iCfxOoj9AESnhUP+/DwpYIt0qEl/s9ZVuuAQaGKvs75n3HfrZZLE+Y7cxVt3AVqcjSj3q1dmQtGkT9EnuRvTw74HkkwfYH5F2tH53EJOcHwg802axSTcI/yUVmir1WFQhYzZEstl3Yf7Ms92IDOzZkrD0/ofvu+3o9ONNmdcx08Dj+cdSIk95zFs3f51fOVUpnxkApln96ScQ5H6sEa/Iih0RUeJau2u3BOOjUsgMcF0Jk0/wbi+tmsAuwiapr4JXSpagKHob/cucS9NZ4KN7H68hQv7YujW5Cr1c/ZGV40Cr5SunbwARk2KMuiDtIss2aMnS+1sDfNHegrdVqNth9XMFSaZBUGlHewtdo/xAulxF73UwyvGKXbYDnbXOomKbGZ92Jv7Yr76uXplEAWjdGdO2mod5DgF+dvWjtSqySVRKDDpeZzsPZtf9oA0="
   on:
     tags: true
+  skip_existing: true
+  provider: pypi # normal deploys
+  user: "__token__"
+  password:
+    secure: "luNqbrMV3//GbAlfq4E4zQqDB5JcOhzUOiWhA7fzTFnylYZ9nqeDzo6PcMp+ovfY5W7O7MZ1aimMPSMPdDVFJTCFuPknzcFhyaQDMLgkdPOub8Dx0/01VGbmUDQmSos7MWhGIVAaSjBdl75sBKELEkETmpZ93Gzwg76XUw+yP73MyxRVgLmlPJQuoAxqtMQ+y0ply+VA3pcUlTtIpXTUWUo0oWSG6tqf7uJj0emKm6qJDJ4iCfxOoj9AESnhUP+/DwpYIt0qEl/s9ZVuuAQaGKvs75n3HfrZZLE+Y7cxVt3AVqcjSj3q1dmQtGkT9EnuRvTw74HkkwfYH5F2tH53EJOcHwg802axSTcI/yUVmir1WFQhYzZEstl3Yf7Ms92IDOzZkrD0/ofvu+3o9ONNmdcx08Dj+cdSIk95zFs3f51fOVUpnxkApln96ScQ5H6sEa/Iih0RUeJau2u3BOOjUsgMcF0Jk0/wbi+tmsAuwiapr4JXSpagKHob/cucS9NZ4KN7H68hQv7YujW5Cr1c/ZGV40Cr5SunbwARk2KMuiDtIss2aMnS+1sDfNHegrdVqNth9XMFSaZBUGlHewtdo/xAulxF73UwyvGKXbYDnbXOomKbGZ92Jv7Yr76uXplEAWjdGdO2mod5DgF+dvWjtSqySVRKDDpeZzsPZtf9oA0="
+  on:
+    tags: true
+    branch: master
+
   skip_existing: true
