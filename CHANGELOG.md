@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.4]
+
+### Added
+- The metainformation about the package
+
+## [0.0.3]
+
+### Changed
+- Removed the test server from the deployment
+
 ## [0.0.2]
 
 ### Changed
