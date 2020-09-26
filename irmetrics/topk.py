@@ -4,7 +4,7 @@ import numpy as np
 def rr(y_true, y_pred, k=20):
     """Compute Recirocal Rank(s).
     Calculate the recirocal of the index for the first matched item in
-    `y_pred`. The score is between 0 and 1.
+    ``y_pred``. The score is between 0 and 1.
 
     This ranking metric yields a high value if true labels are ranked high by
     ``y_pred``.
@@ -49,6 +49,38 @@ def rr(y_true, y_pred, k=20):
 
 
 def recall(y_true, y_pred=None, ignore=None, k=20):
+    """Compute Recall(s).
+    Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
+    This is the binary score, 0 -- all predictionss are irrelevant
+    and 1 otherwise.
+    Parameters
+    ----------
+    y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
+        True labels of entities to be ranked. In case of scalars ``y_pred``
+        should be of shape (1, n_labels).
+    y_pred : iterable, ndarray of shape (n_samples, n_labels)
+        Target labels sorted by relevance (as returned by an IR system).
+    k : int, default=20
+        Only consider the highest k scores in the ranking. If None, use all
+        outputs.
+    Returns
+    -------
+    rr : bool in [True, False]
+        The relevances for all samples.
+    References
+    ----------
+    `Wikipedia entry for precision and recall
+    <https://en.wikipedia.org/wiki/Precision_and_recall>`_
+    Examples
+    --------
+    >>> from irmetrics.topk import recall
+    >>> # we have groud-truth label of some answers to a query:
+    >>> y_true = 1
+    >>> # and the predicted labels by an IR system
+    >>> y_pred = [0, 1, 4]
+    >>> recall(y_true, y_pred)
+    True
+    """
     y_true, y_pred = np.atleast_2d(y_true, y_pred)
     y_true = y_true.T[:, :k]
     y_pred = y_pred[:, :k]
