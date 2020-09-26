@@ -22,12 +22,12 @@ def test_rr(y_true, y_pred, output, n_samples=128):
 
 
 @pytest.mark.parametrize("y_true, y_pred, output", [
-    (1, [1, 0, 0], 1),
-    (1, [0, 1, 0], 1),
-    (1, [0, 0, 1], 1),
-    (1, [1, 1, 1], 1),
-    (1, [0, 0, 0], 0),
-    (1, [0, 0, 0] * 20 + [1], 0),
+    (1, [1, 0, 0], True),
+    (1, [0, 1, 0], True),
+    (1, [0, 0, 1], True),
+    (1, [1, 1, 1], True),
+    (1, [0, 0, 0], False),
+    (1, [0, 0, 0] * 20 + [1], False),
 ])
 def test_recall(y_true, y_pred, output, n_samples=128):
     assert recall(y_true, y_pred) == output

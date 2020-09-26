@@ -1,6 +1,30 @@
 import numpy as np
+from functools import wraps
 
 
+def _ensure_io(f):
+    @wraps(f)
+    def wrapper(y_true, y_pred, k=20):
+        # Ensure (n_samples, n_labels) shapes for the inputs
+        y_true, y_pred = np.atleast_2d(y_true, y_pred)
+
+        # Take at most k labels
+        y_true = y_true.T[:, :k]
+        y_pred = y_pred[:, :k]
+
+        # Calculate the measure
+        raw_outputs = f(y_true, y_pred, k)
+
+        # Remove unwanted dimensions if any
+        outputs = np.squeeze(raw_outputs)
+        if not outputs.shape:
+            return outputs.item()
+        return outputs
+
+    return wrapper
+
+
+@_ensure_io
 def rr(y_true, y_pred, k=20):
     """Compute Recirocal Rank(s).
     Calculate the recirocal of the index for the first matched item in
@@ -36,18 +60,12 @@ def rr(y_true, y_pred, k=20):
     >>> rr(y_true, y_pred)
     0.5
     """
-    y_true, y_pred = np.atleast_2d(y_true, y_pred)
-    y_true = y_true.T[:, :k]
-    y_pred = y_pred[:, :k]
-
     relevant = y_true == y_pred
     index = relevant.argmax(-1)
-    rrs = np.squeeze(relevant.any(-1) / (index + 1))
-    if not rrs.shape:
-        return rrs.item()
-    return rrs
+    return relevant.any(-1) / (index + 1)
 
 
+@_ensure_io
 def recall(y_true, y_pred=None, ignore=None, k=20):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
@@ -81,12 +99,4 @@ def recall(y_true, y_pred=None, ignore=None, k=20):
     >>> recall(y_true, y_pred)
     True
     """
-    y_true, y_pred = np.atleast_2d(y_true, y_pred)
-    y_true = y_true.T[:, :k]
-    y_pred = y_pred[:, :k]
-
-    relevant = (y_true == y_pred).any(-1) / y_true.shape[-1]
-    recalls = np.squeeze(relevant)
-    if not recalls.shape:
-        return recalls.item()
-    return recalls
+    return (y_true == y_pred).any(-1) / y_true.shape[-1]
