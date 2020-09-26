@@ -46,3 +46,15 @@ def rr(y_true, y_pred, k=20):
     if not rrs.shape:
         return rrs.item()
     return rrs
+
+
+def recall(y_true, y_pred=None, ignore=None, k=20):
+    y_true, y_pred = np.atleast_2d(y_true, y_pred)
+    y_true = y_true.T[:, :k]
+    y_pred = y_pred[:, :k]
+
+    relevant = (y_true == y_pred).any(-1) / y_true.shape[-1]
+    recalls = np.squeeze(relevant)
+    if not recalls.shape:
+        return recalls.item()
+    return recalls
