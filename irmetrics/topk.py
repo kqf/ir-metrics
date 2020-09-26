@@ -33,7 +33,7 @@ def rr(y_true, y_pred, k=20):
     >>> y_true = 1
     >>> # and the predicted labels by an IR system
     >>> y_pred = [0, 1, 4]
-    >>> ndcg_score(y_true, y_pred)
+    >>> rr(y_true, y_pred)
     0.5
     """
     y_true, y_pred = np.atleast_2d(y_true, y_pred)
