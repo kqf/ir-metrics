@@ -1,5 +1,5 @@
 import numpy as np
-from irmetrics.io import to_scalar
+from irmetrics.io import to_scalar, _ensure_io
 
 
 def coverage(y_pred, padding=None):
@@ -36,3 +36,19 @@ def coverage(y_pred, padding=None):
     0
     """
     return to_scalar(np.not_equal(y_pred, padding).sum(axis=-1) > 0)
+
+
+@_ensure_io
+def iou(y_true, y_pred, k=20):
+    """Compute Intersection over Union score(s)
+    Check if ``y_pred`` contains any nontrivial results.
+
+    This ranking metric yields a high value if true labels are ranked high by
+    ``y_pred``.
+    """
+
+    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+    intersection = relevant.sum(axis=-1)
+
+    union = y_true.shape[-1] + y_pred[-1] - intersection
+    return to_scalar(intersection / union)
