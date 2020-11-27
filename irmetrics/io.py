@@ -2,6 +2,12 @@ import numpy as np
 from functools import wraps
 
 
+def to_scalar(x):
+    if not x.shape:
+        return x.item()
+    return x
+
+
 def _ensure_io(f):
     @wraps(f)
     def wrapper(y_true, y_pred, k=20):
@@ -16,9 +22,6 @@ def _ensure_io(f):
         raw_outputs = f(y_true, y_pred, k)
 
         # Remove unwanted dimensions if any
-        outputs = np.squeeze(raw_outputs)
-        if not outputs.shape:
-            return outputs.item()
-        return outputs
+        return to_scalar(np.squeeze(raw_outputs))
 
     return wrapper
