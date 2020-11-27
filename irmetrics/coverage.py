@@ -35,4 +35,4 @@ def coverage(y_pred, padding=None):
     >>> coverage(y_true)
     0
     """
-    return to_scalar(np.not_equal(y_pred, padding).sum(axis=-1))
+    return to_scalar(np.not_equal(y_pred, padding).sum(axis=-1) > 0)
