@@ -139,3 +139,23 @@ def precision(y_true, y_pred=None, ignore=None, k=20):
     0.25
     """
     return (y_true == y_pred).any(-1) / y_pred.shape[-1]
+
+
+def dcg_score(relevancy, k=None, weights=1.0):
+    top = relevancy[..., :k]
+    gains = (2 ** top - 1) / np.log2(np.arange(top.shape[-1]) + 2)[None, ...]
+    return np.sum(gains * weights, axis=-1)
+
+
+def ndcg_score(relevant, k=25, weights=1.0):
+    # Sort in descending order, calculate the gain
+    idcg = dcg_score(np.flip(np.sort(relevant, axis=-1), axis=-1), k, weights)
+
+    # Normalize to the ideal dcg score
+    return dcg_score(relevant, k) / idcg
+
+
+@_ensure_io
+def ndcg(y_true, y_pred, k=25):
+    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+    return ndcg_score(relevant, k)
