@@ -97,6 +97,41 @@ def recall(y_true, y_pred=None, ignore=None, k=20):
     >>> # and the predicted labels by an IR system
     >>> y_pred = [0, 1, 4]
     >>> recall(y_true, y_pred)
-    True
+    1.0
     """
     return (y_true == y_pred).any(-1) / y_true.shape[-1]
+
+
+@_ensure_io
+def precision(y_true, y_pred=None, ignore=None, k=20):
+    """Compute Recall(s).
+    and 1 otherwise.
+    Parameters
+    ----------
+    y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
+        True labels of entities to be ranked. In case of scalars ``y_pred``
+        should be of shape (1, n_labels).
+    y_pred : iterable, ndarray of shape (n_samples, n_labels)
+        Target labels sorted by relevance (as returned by an IR system).
+    k : int, default=20
+        Only consider the highest k scores in the ranking. If None, use all
+        outputs.
+    Returns
+    -------
+    rr : bool in [True, False]
+        The relevances for all samples.
+    References
+    ----------
+    `Wikipedia entry for precision and recall
+    <https://en.wikipedia.org/wiki/Precision_and_recall>`_
+    Examples
+    --------
+    >>> from irmetrics.topk import recall
+    >>> # we have groud-truth label of some answers to a query:
+    >>> y_true = 1
+    >>> # and the predicted labels by an IR system
+    >>> y_pred = [0, 1, 4, 3]
+    >>> precision(y_true, y_pred)
+    0.25
+    """
+    return (y_true == y_pred).any(-1) / y_pred.shape[-1]
