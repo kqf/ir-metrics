@@ -106,6 +106,9 @@ def recall(y_true, y_pred=None, ignore=None, k=20):
 def precision(y_true, y_pred=None, ignore=None, k=20):
     """Compute Recall(s).
     and 1 otherwise.
+    Check which fraction of ``y_pred`` is in ``y_true``.
+    **NB**: When passing ``y_pred` of shape `[n_samples, n_outputs]`
+    the result is quivalent to `recall(y_pred, y_true) / n_outputs`.
     Parameters
     ----------
     y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
