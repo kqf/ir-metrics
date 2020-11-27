@@ -1,4 +1,5 @@
 # python related
 *.pyc
 *.egg-*
+.eggs
 .python-version
