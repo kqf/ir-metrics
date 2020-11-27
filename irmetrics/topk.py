@@ -71,6 +71,7 @@ def recall(y_true, y_pred=None, ignore=None, k=20):
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
     and 1 otherwise.
+    This definition of recall is equivalent to accuracy@k.
     Parameters
     ----------
     y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
