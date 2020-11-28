@@ -37,11 +37,37 @@ def coverage(y_pred, padding=None):
 
 @_ensure_io
 def iou(y_true, y_pred, k=20):
-    """Compute Intersection over Union score(s)
-    Check if ``y_pred`` contains any nontrivial results.
-
-    This ranking metric yields a high value if true labels are ranked high by
-    ``y_pred``.
+    """Compute the approximate version of Intersection over Union.
+    The approximation comes in assumption that `y_true` and `y_pred`
+    contain only unique values.
+    Parameters
+    ----------
+    y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
+        True labels of entities to be ranked. In case of scalars ``y_pred``
+        should be of shape (1, n_labels).
+    y_pred : iterable, ndarray of shape (n_samples, n_labels)
+        Target labels sorted by relevance (as returned by an IR system).
+    k : int, default=20
+        Only consider the highest k scores in the ranking. If None, use all
+        outputs.
+    Returns
+    -------
+    iou : float in [0., 1.]
+        The ratio of relevant retrieved entries to the union of relevant
+        and retrieved entries.
+    References
+    ----------
+    `Wikipedia entry for Jaccard Index
+    <https://en.wikipedia.org/wiki/Jaccard_index>`_
+    Examples
+    --------
+    >>> from irmetrics.topk import rr
+    >>> # we have groud-truth label of some answers to a query:
+    >>> y_true = 1
+    >>> # and the predicted labels by an IR system
+    >>> y_pred = [0, 1, 4]
+    >>> iou(y_true, y_pred)
+    1. / 3.
     """
 
     relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
