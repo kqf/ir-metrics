@@ -5,9 +5,6 @@ from irmetrics.io import to_scalar, _ensure_io
 def coverage(y_pred, padding=None):
     """Compute Coverage(s)
     Check if ``y_pred`` contains any nontrivial results.
-
-    This ranking metric yields a high value if true labels are ranked high by
-    ``y_pred``.
     Parameters
     ----------
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
@@ -31,7 +28,7 @@ def coverage(y_pred, padding=None):
     >>> y_pred = [0, None]
     >>> coverage(y_true)
     1
-    >>> y_pred = [ None]
+    >>> y_pred = [None]
     >>> coverage(y_true)
     0
     """
@@ -51,4 +48,4 @@ def iou(y_true, y_pred, k=20):
     intersection = relevant.sum(axis=-1)
 
     union = y_true.shape[-1] + y_pred[-1] - intersection
-    return to_scalar(intersection / union)
+    return intersection / union
