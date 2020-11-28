@@ -45,7 +45,11 @@ def iou(y_true, y_pred, k=20):
     """
 
     relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
-    intersection = relevant.sum(axis=-1)
 
-    union = y_true.shape[-1] + y_pred[-1] - intersection
+    # Approximate intersection
+    intersection = (relevant).sum(axis=-1)
+
+    # Approximate union
+    union = (y_pred.shape[-1] + y_true.shape[-1] - intersection)
+
     return intersection / union
