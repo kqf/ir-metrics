@@ -25,7 +25,7 @@ def test_rr(y_pred, output, n_samples=128):
 
 @pytest.mark.parametrize("y_true, y_pred, output", [
     (1, [1, 2, 3], 1. / 3),
-    (1, [2, 1, 2], 1. / 3),
+    (1, [2, 1, 3], 1. / 3),
     (1, [2, 3, 1], 1. / 3),
     (1, [3, 4, 5], 0),
 ])

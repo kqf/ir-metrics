@@ -70,6 +70,12 @@ def iou(y_true, y_pred, k=20):
     1. / 3.
     """
 
+    if np.any((y_pred[:, :, None] == y_pred[:, None]).sum(axis=-1) > 1):
+        raise ValueError("y_pred contains has duplicates along the last axis")
+
+    if np.any((y_true[:, :, None] == y_true[:, None]).sum(axis=-1) > 1):
+        raise ValueError("y_true contains has duplicates along the last axis")
+
     relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
 
     # Approximate intersection
