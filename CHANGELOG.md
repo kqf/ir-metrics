@@ -7,7 +7,7 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 ### Added
 - Precision and ndcg scores
 - Small fixes to the docstrings
-- Add coverage
+- Add coverage and IoU scores
 
 ### Changed
 - Move readme to `.rst`

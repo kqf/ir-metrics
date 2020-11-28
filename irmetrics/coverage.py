@@ -1,13 +1,10 @@
 import numpy as np
-from irmetrics.io import to_scalar
+from irmetrics.io import to_scalar, _ensure_io
 
 
 def coverage(y_pred, padding=None):
     """Compute Coverage(s)
     Check if ``y_pred`` contains any nontrivial results.
-
-    This ranking metric yields a high value if true labels are ranked high by
-    ``y_pred``.
     Parameters
     ----------
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
@@ -31,8 +28,60 @@ def coverage(y_pred, padding=None):
     >>> y_pred = [0, None]
     >>> coverage(y_true)
     1
-    >>> y_pred = [ None]
+    >>> y_pred = [None]
     >>> coverage(y_true)
     0
     """
     return to_scalar(np.not_equal(y_pred, padding).sum(axis=-1) > 0)
+
+
+@_ensure_io
+def iou(y_true, y_pred, k=20):
+    """Compute the approximate version of Intersection over Union.
+    The approximation comes in assumption that `y_true` and `y_pred`
+    contain only unique values.
+    Parameters
+    ----------
+    y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
+        True labels of entities to be ranked. In case of scalars ``y_pred``
+        should be of shape (1, n_labels).
+    y_pred : iterable, ndarray of shape (n_samples, n_labels)
+        Target labels sorted by relevance (as returned by an IR system).
+    k : int, default=20
+        Only consider the highest k scores in the ranking. If None, use all
+        outputs.
+    Returns
+    -------
+    iou : float in [0., 1.]
+        The ratio of relevant retrieved entries to the union of relevant
+        and retrieved entries.
+    References
+    ----------
+    `Wikipedia entry for Jaccard Index
+    <https://en.wikipedia.org/wiki/Jaccard_index>`_
+    Examples
+    --------
+    >>> from irmetrics.topk import rr
+    >>> # we have groud-truth label of some answers to a query:
+    >>> y_true = 1
+    >>> # and the predicted labels by an IR system
+    >>> y_pred = [0, 1, 4]
+    >>> iou(y_true, y_pred)
+    1. / 3.
+    """
+
+    if np.any((y_pred[:, :, None] == y_pred[:, None]).sum(axis=-1) > 1):
+        raise ValueError("y_pred contains has duplicates along the last axis")
+
+    if np.any((y_true[:, :, None] == y_true[:, None]).sum(axis=-1) > 1):
+        raise ValueError("y_true contains has duplicates along the last axis")
+
+    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+
+    # Approximate intersection
+    intersection = (relevant).sum(axis=-1)
+
+    # Approximate union
+    union = (y_pred.shape[-1] + y_true.shape[-1] - intersection)
+
+    return intersection / union
