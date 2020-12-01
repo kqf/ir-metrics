@@ -153,7 +153,7 @@ def dcg_score(relevancy, k=None, weights=1.0):
     return np.sum(gains * weights, axis=-1)
 
 
-def ndcg_score(relevant, k=25, weights=1.0):
+def ndcg_score(relevant, k=20, weights=1.0):
     """Compute Normalized Discounted Cumulative Gain score(s) based on
     `relevancy` judgements provided.
     Parameters
@@ -188,7 +188,7 @@ def ndcg_score(relevant, k=25, weights=1.0):
 
 
 @_ensure_io
-def ndcg(y_true, y_pred, k=25):
+def ndcg(y_true, y_pred, k=20):
     """Compute Discounted Cumulative Gain score(s) based on `relevancy`
     judgements provided.
     Parameters
@@ -219,3 +219,18 @@ def ndcg(y_true, y_pred, k=25):
     """
     relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
     return ndcg_score(relevant, k)
+
+
+@_ensure_io
+def ap(y_true, y_pred, k=20):
+    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+
+    # NB: y_true.T is a fix for atleaset2d + transpose paradigm
+    ap = np.sum([
+        np.array(
+            precision(y_true.T, y_pred, ik + 1)
+        )[..., None] * relevant[..., [ik]]
+        for ik in range(min(k, y_true.shape[-1]))
+    ], axis=-1)
+
+    return ap / y_pred.shape[-1]
