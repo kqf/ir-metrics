@@ -223,6 +223,42 @@ def ndcg(y_true, y_pred, k=20):
 
 @_ensure_io
 def ap(y_true, y_pred, k=20):
+    """Compute Average Precision score(s).
+    AP is an aproximation of the integral over PR-curve.
+    Parameters
+    ----------
+    y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
+        True labels of entities to be ranked. In case of scalars ``y_pred``
+        should be of shape (1, n_labels).
+    y_pred : iterable, ndarray of shape (n_samples, n_labels)
+        Target labels sorted by relevance (as returned by an IR system).
+    k : int, default=20
+        Only consider the highest k scores in the ranking. If None, use all
+        outputs. The minimum between the nuber of correct answers and k will
+        be used to compute the score.
+    Returns
+    -------
+    ap : float in [0., 1.]
+        The average precision for a given sample.
+    References
+    ----------
+    `Wikipedia entry for Mean Average Precision
+    <https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision>`_
+    Examples
+    --------
+    >>> from irmetrics.topk import ap
+    >>> # we have groud-truth label of some answers to a query:
+    >>> y_true = 1
+    >>> # and the predicted labels by an IR system
+    >>> y_pred = [1, 0, 0]
+    >>> ap(y_true, y_pred)
+    1.0
+    >>> y_true = [1, 4, 5]
+    >>> # and the predicted labels by an IR system
+    >>> y_pred = [1, 2, 3, 4, 5]
+    >>> ap(y_true, y_pred)
+    1.0
+    """
     relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
 
     # NB: y_true.T is a fix for atleaset2d + transpose paradigm
