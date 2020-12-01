@@ -8,6 +8,7 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 - Precision and ndcg scores
 - Small fixes to the docstrings
 - Add coverage and IoU scores
+- Add Average Precision score
 
 ### Changed
 - Move readme to `.rst`
