@@ -16,7 +16,7 @@ _id = ar([[1]])
     ([[1]], _id),  # [1, 1] -> [1, 1]
     ([[1, 2]], ar([[1, 2]])),  # [1, 2] -> [1, 2]
     ([[1], [2]], ar([[1], [2]])),  # [2, 1] -> [2, 1]
-    # Resalistic case: [n_samples, n_preds] -> [n_samples, k]
+    # Realistic case: [n_samples, n_preds] -> [n_samples, k]
     (np.tile(1, (128, 40)), np.tile(1, (128, 20))),
 ])
 @pytest.mark.parametrize("y_true, y_true_ex", [
@@ -27,7 +27,7 @@ _id = ar([[1]])
     # The cases below are currently not supported
     # ([[1, 2]], ar([[1, 2]])),  # [1, 2] -> [1, 2]
     # ([[1], [2]], ar([[1], [2]])),  # [2, 1] -> [2, 1]
-    # # Resalistic case: [n_samples, n_preds] -> [n_samples, k]
+    # # Realistic case: [n_samples, n_preds] -> [n_samples, k]
     # (np.tile(1, (128, 40)), np.tile(1, (128, 20))),
 ])
 def test_handles_inputs(y_true, y_pred, y_true_ex, y_pred_ex):
