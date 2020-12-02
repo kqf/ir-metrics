@@ -9,16 +9,26 @@ from irmetrics.io import ensure_inputs
 _id = ar([[1]])
 
 
-@pytest.mark.parametrize("y_true, y_pred, y_true_ex, y_pred_ex", [
-    (1, 1, _id, _id),  # sc -> [1, 1]
-    # First check only y_pred
-    (1, [1], _id, _id),  # [1] -> [1, 1]
-    (1, [[1]], _id, _id),  # [1, 1] -> [1, 1]
-    (1, [[1, 2]], _id, ar([[1, 2]])),  # [1, 2] -> [1, 2]
-    (
-        1, np.tile(1, (128, 40)),
-        _id, np.tile(1, (128, 20))
-    ),  # [n_samples, n_preds] -> [n_samples, k]
+@pytest.mark.parametrize("y_pred, y_pred_ex", [
+    (1, _id),  # scalar -> [1, 1]
+    ([1], _id),  # [1] -> [1, 1]
+    ([1, 2, 3, 4], ar([[1, 2, 3, 4]])),  # [n] -> [1, n]
+    ([[1]], _id),  # [1, 1] -> [1, 1]
+    ([[1, 2]], ar([[1, 2]])),  # [1, 2] -> [1, 2]
+    ([[1], [2]], ar([[1], [2]])),  # [2, 1] -> [2, 1]
+    # Resalistic case: [n_samples, n_preds] -> [n_samples, k]
+    (np.tile(1, (128, 40)), np.tile(1, (128, 20))),
+])
+@pytest.mark.parametrize("y_true, y_true_ex", [
+    (1, _id),  # scalar -> [1, 1]
+    ([1], _id),  # [1] -> [1, 1]
+    ([1, 2, 3, 4], ar([[1], [2], [3], [4]])),  # [n] -> [n, 1]
+    ([[1]], _id),  # [1, 1] -> [1, 1]
+    # The cases below are currently not supported
+    # ([[1, 2]], ar([[1, 2]])),  # [1, 2] -> [1, 2]
+    # ([[1], [2]], ar([[1], [2]])),  # [2, 1] -> [2, 1]
+    # # Resalistic case: [n_samples, n_preds] -> [n_samples, k]
+    # (np.tile(1, (128, 40)), np.tile(1, (128, 20))),
 ])
 def test_handles_inputs(y_true, y_pred, y_true_ex, y_pred_ex):
     true, pred = ensure_inputs(y_true, y_pred)
