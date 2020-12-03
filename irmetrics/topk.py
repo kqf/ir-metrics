@@ -261,10 +261,9 @@ def ap(y_true, y_pred, k=20):
     """
     relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
 
-    # NB: y_true.T is a fix for atleaset2d + transpose paradigm
     ap = np.sum([
         np.array(
-            precision(y_true.T, y_pred, ik + 1)
+            precision(y_true, y_pred, ik + 1)
         )[..., None] * relevant[..., [ik]]
         for ik in range(min(k, y_true.shape[-1]))
     ], axis=-1)
