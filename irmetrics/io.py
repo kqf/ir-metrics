@@ -11,8 +11,14 @@ def to_scalar(x):
 def ensure_inputs(y_true, y_pred, k=20):
     y_true, y_pred = np.atleast_2d(y_true, y_pred)
 
+    # np.atleast_2d adds a new axis as a batch dimension
+    # thus y_pred[n_samples] is converted to y_pred[1, n_samples]
+    # In other words, this condition allows passing y_true of [n_samples,]
+    if y_true.shape[0] == 1 and y_true.shape[1] == y_pred.shape[0]:
+        y_true = y_true.T
+
     # Take at most k labels
-    y_true = y_true.T[:, :k]
+    y_true = y_true[:, :k]
     y_pred = y_pred[:, :k]
     return y_true, y_pred
 
