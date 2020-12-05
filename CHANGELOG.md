@@ -12,6 +12,7 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ### Changed
 - Move readme to `.rst`
+- Simplify the `topk` tests
 
 ### Added
 - The reciprocal rank and recall metrics
