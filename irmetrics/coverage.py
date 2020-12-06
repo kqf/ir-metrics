@@ -1,6 +1,6 @@
 import numpy as np
 from irmetrics.io import to_scalar, _ensure_io
-from irmetrics.relevancy import relevant_counts
+from irmetrics.relevance import relevant_counts
 
 
 def coverage(y_pred, padding=None):
@@ -37,7 +37,7 @@ def coverage(y_pred, padding=None):
 
 
 @_ensure_io
-def iou(y_true, y_pred, k=20, relevancy=None, n_uniq=relevant_counts):
+def iou(y_true, y_pred, k=20, relevance=None, n_uniq=relevant_counts):
     """Compute the approximate version of Intersection over Union.
     The approximation comes in assumption that `y_true` and `y_pred`
     contain only unique values.
@@ -77,7 +77,7 @@ def iou(y_true, y_pred, k=20, relevancy=None, n_uniq=relevant_counts):
     if np.any(n_uniq(y_true, y_true) > 1):
         raise ValueError("y_true has duplicates along the last axis")
 
-    relevant = relevancy(y_pred, y_true)
+    relevant = relevance(y_pred, y_true)
 
     # Approximate intersection
     intersection = (relevant).sum(axis=-1)

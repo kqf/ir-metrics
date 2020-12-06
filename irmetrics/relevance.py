@@ -1,6 +1,6 @@
 def unilabel(y_true, y_pred):
     """Compute relevance(s) of predicted labels.
-    This version of the relevancy function works only for the queries
+    This version of the relevance function works only for the queries
     (problems) with a single groud truth label.
 
     It is provided mainly for two reasons: there is a slight speedup (order of
@@ -24,7 +24,7 @@ def unilabel(y_true, y_pred):
     Examples
     --------
     >>> import numpy as np
-    >>> from irmetrics.relevancy import unilabel
+    >>> from irmetrics.relevance import unilabel
     >>> # groud-truth label of some answers to a query:
     >>> y_true = np.array([[1]]) # (1, 1)
     >>> # and the predicted labels by an IR system
@@ -59,7 +59,7 @@ def multilabel(y_true, y_pred):
     Examples
     --------
     >>> import numpy as np
-    >>> from irmetrics.relevancy import multilabel
+    >>> from irmetrics.relevance import multilabel
     >>> # groud-truth label of some answers to a query:
     >>> y_true = np.array([[1]]) # (1, 1)
     >>> # and the predicted labels by an IR system
@@ -96,7 +96,7 @@ def relevant_counts(y_pred, y_true):
     Examples
     --------
     >>> import numpy as np
-    >>> from irmetrics.relevancy import relevant_counts
+    >>> from irmetrics.relevance import relevant_counts
     >>> # groud-truth label of some answers to a query:
     >>> y_true = np.array([[1]]) # (1, 1)
     >>> # and the predicted labels by an IR system
