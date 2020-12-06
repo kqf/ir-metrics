@@ -217,7 +217,7 @@ def ndcg(y_true, y_pred, k=20):
     >>> ndcg(y_true, y_pred)
     1.0
     """
-    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+    relevant = y_true == y_pred
     return ndcg_score(relevant, k)
 
 
@@ -259,7 +259,7 @@ def ap(y_true, y_pred, k=20):
     >>> ap(y_true, y_pred)
     1.0
     """
-    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+    relevant = y_true == y_pred
 
     ap = np.sum([
         np.array(
