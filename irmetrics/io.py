@@ -1,5 +1,6 @@
 import numpy as np
 from functools import wraps
+from irmetrics.relevancy import multilabel
 
 
 def to_scalar(x):
@@ -25,12 +26,12 @@ def ensure_inputs(y_true, y_pred, k=20):
 
 def _ensure_io(f):
     @wraps(f)
-    def wrapper(y_true, y_pred, k=20):
+    def wrapper(y_true, y_pred, k=20, relevancy=multilabel):
         # Ensure (n_samples, n_labels) shapes for the inputs
         y_true_, y_pred_ = ensure_inputs(y_true, y_pred, k)
 
         # Calculate the measure
-        raw_outputs = f(y_true_, y_pred_, k)
+        raw_outputs = f(y_true_, y_pred_, k, relevancy=relevancy)
 
         # Remove unwanted dimensions if any
         return to_scalar(np.squeeze(raw_outputs))
