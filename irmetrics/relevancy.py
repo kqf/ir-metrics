@@ -19,6 +19,10 @@ def unilabel(y_true, y_pred):
     -------
     relevance : bolean ndarray
         The relevance judgements for `y_pred` of shape (n_samples, 1)
+    Raises
+    -------
+    ValueError
+        If `y_true` has last dimension larger than 1 (multilabel case).
     Examples
     --------
     >>> import numpy as np
@@ -34,12 +38,10 @@ def unilabel(y_true, y_pred):
     >>> unilabel(y_true, y_pred)
     array([[False,  True, False],
            [False, False, False]])
-    >>> # Now the multilabel case:
-    >>> y_true = np.array([[1, 4]]) # (1, 2)
-    >>> y_pred = np.array([[0, 1, 4]]) # (1, 3)
-    >>> unilabel(y_true, y_pred)
-    False
     """
+    if y_true.shape[-1] != 1:
+        msg = "y_true is expected to be of shape (n_samples, 1), got {}"
+        raise ValueError(msg.format(y_true.shape))
     return y_true == y_pred
 
 
