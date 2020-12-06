@@ -9,6 +9,7 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 - Small fixes to the docstrings
 - Add coverage and IoU scores
 - Add Average Precision score
+- Add support for custom relevance functions
 
 ### Changed
 - Move readme to `.rst`
