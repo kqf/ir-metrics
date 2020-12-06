@@ -1,5 +1,3 @@
-
-
 def unilabel(y_true, y_pred):
     """Compute relevance(s) of predicted labels.
     This version of the relevancy function works only for the queries
@@ -80,3 +78,7 @@ def multilabel(y_true, y_pred):
     array([[False,  True,  True]])
     """
     return (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+
+
+def relevant_counts(y_pred, y_true):
+    return (y_pred[:, :, None] == y_pred[:, None]).sum(axis=-1)
