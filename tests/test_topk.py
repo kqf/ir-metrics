@@ -4,7 +4,7 @@ import numpy as np
 from contextlib import contextmanager
 
 from irmetrics.topk import rr, recall, precision, ndcg, ap
-from irmetrics.relevancy import unilabel, multilabel
+from irmetrics.relevance import unilabel, multilabel
 
 
 @contextmanager
@@ -83,13 +83,13 @@ def _pars(keys, inputs, outputs):
         ap,
     ], INPUTS, OUTPUTS)
 )
-@pytest.mark.parametrize("relevancy", [
+@pytest.mark.parametrize("relevance", [
     unilabel,
     multilabel,
 ])
-def test_all(y_true, y_pred, output, expectation, f, relevancy, n_samples=128):
+def test_all(y_true, y_pred, output, expectation, f, relevance, n_samples=128):
     with expectation():
-        np.testing.assert_equal(f(y_true, y_pred, relevancy=relevancy), output)
+        np.testing.assert_equal(f(y_true, y_pred, relevance=relevance), output)
 
     # Now the vectorized version of the same function
     y_trues = np.repeat(np.array(y_true), n_samples)
@@ -98,4 +98,4 @@ def test_all(y_true, y_pred, output, expectation, f, relevancy, n_samples=128):
 
     with expectation():
         np.testing.assert_equal(
-            f(y_trues, y_preds, relevancy=relevancy), outputs)
+            f(y_trues, y_preds, relevance=relevance), outputs)

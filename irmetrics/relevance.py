@@ -1,8 +1,6 @@
-
-
 def unilabel(y_true, y_pred):
     """Compute relevance(s) of predicted labels.
-    This version of the relevancy function works only for the queries
+    This version of the relevance function works only for the queries
     (problems) with a single groud truth label.
 
     It is provided mainly for two reasons: there is a slight speedup (order of
@@ -26,7 +24,7 @@ def unilabel(y_true, y_pred):
     Examples
     --------
     >>> import numpy as np
-    >>> from irmetrics.relevancy import unilabel
+    >>> from irmetrics.relevance import unilabel
     >>> # groud-truth label of some answers to a query:
     >>> y_true = np.array([[1]]) # (1, 1)
     >>> # and the predicted labels by an IR system
@@ -57,11 +55,11 @@ def multilabel(y_true, y_pred):
     Returns
     -------
     relevance : bolean ndarray
-        The relevance judgements for `y_pred` of shape (n_samples, 1)
+        The relevance judgements for `y_pred` of shape (n_samples, n_labels)
     Examples
     --------
     >>> import numpy as np
-    >>> from irmetrics.relevancy import multilabel
+    >>> from irmetrics.relevance import multilabel
     >>> # groud-truth label of some answers to a query:
     >>> y_true = np.array([[1]]) # (1, 1)
     >>> # and the predicted labels by an IR system
@@ -80,3 +78,40 @@ def multilabel(y_true, y_pred):
     array([[False,  True,  True]])
     """
     return (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+
+
+def relevant_counts(y_pred, y_true):
+    """Calculate the total number of relevant items.
+    Parameters
+    ----------
+    y_true : ndarray of shape (n_samples, n_true), where `n_samples >= 1`
+        Ground true labels for a given query (as returned by an IR system).
+    y_pred : ndarray of shape (n_samples, n_labels), where `n_samples >= 1`
+        Target labels sorted by relevance (as returned by an IR system).
+        The `n_labels` and `n_true` may not be the same.
+    Returns
+    -------
+    relevance_counts: ndarray
+        The number of true relevance judgements for `y_pred`.
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from irmetrics.relevance import relevant_counts
+    >>> # groud-truth label of some answers to a query:
+    >>> y_true = np.array([[1]]) # (1, 1)
+    >>> # and the predicted labels by an IR system
+    >>> y_pred = np.array([[0, 1, 4]]) # (1, 3)
+    >>> relevant_counts(y_true, y_pred)
+    array([[1]])
+    >>> y_true = np.array([[1], [2]]) # (2, 1)
+    >>> y_pred = np.array([[0, 1, 4], [5, 6, 7]]) # (2, 3)
+    >>> relevant_counts(y_true, y_pred)
+    array([[1],
+           [1]])
+    >>> # Now the relevant_co  unts case:
+    >>> y_true = np.array([[1, 4]]) # (1, 2)
+    >>> y_pred = np.array([[0, 1, 4]]) # (1, 3)
+    >>> relevant_counts(y_true, y_pred)
+    array([[1, 1]])
+    """
+    return (y_pred[:, :, None] == y_pred[:, None]).sum(axis=-1)

@@ -1,11 +1,11 @@
 import numpy as np
 
 from irmetrics.io import _ensure_io
-from irmetrics.relevancy import multilabel
+from irmetrics.relevance import multilabel
 
 
 @_ensure_io
-def rr(y_true, y_pred, k=20, relevancy=multilabel):
+def rr(y_true, y_pred, k=20, relevance=multilabel):
     """Compute Recirocal Rank(s).
     Calculate the recirocal of the index for the first matched item in
     ``y_pred``. The score is between 0 and 1.
@@ -40,13 +40,13 @@ def rr(y_true, y_pred, k=20, relevancy=multilabel):
     >>> rr(y_true, y_pred)
     0.5
     """
-    relevant = relevancy(y_true, y_pred)
+    relevant = relevance(y_true, y_pred)
     index = relevant.argmax(-1)
     return relevant.any(-1) / (index + 1)
 
 
 @_ensure_io
-def recall(y_true, y_pred=None, ignore=None, k=20, relevancy=multilabel):
+def recall(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
@@ -80,11 +80,11 @@ def recall(y_true, y_pred=None, ignore=None, k=20, relevancy=multilabel):
     >>> recall(y_true, y_pred)
     1.0
     """
-    return relevancy(y_true, y_pred).any(-1) / y_true.shape[-1]
+    return relevance(y_true, y_pred).any(-1) / y_true.shape[-1]
 
 
 @_ensure_io
-def precision(y_true, y_pred=None, ignore=None, k=20, relevancy=multilabel):
+def precision(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
     """Compute Recall(s).
     and 1 otherwise.
     Check which fraction of ``y_pred`` is in ``y_true``.
@@ -118,15 +118,15 @@ def precision(y_true, y_pred=None, ignore=None, k=20, relevancy=multilabel):
     >>> precision(y_true, y_pred)
     0.25
     """
-    return relevancy(y_true, y_pred).any(-1) / y_pred.shape[-1]
+    return relevance(y_true, y_pred).any(-1) / y_pred.shape[-1]
 
 
-def dcg_score(relevancy, k=None, weights=1.0):
-    """Compute Discounted Cumulative Gain score(s) based on `relevancy`
+def dcg_score(relevance, k=None, weights=1.0):
+    """Compute Discounted Cumulative Gain score(s) based on `relevance`
     judgements provided.
     Parameters
     ----------
-    relevancy : iterable or ndarray of shape (n_samples, n_labels) or simply
+    relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
     weights : default=1.0, scalar, iterable or ndarray of shape (n_samples,)
         takes into account the importance of each sample, if relevant.
@@ -145,21 +145,21 @@ def dcg_score(relevancy, k=None, weights=1.0):
     --------
     >>> from irmetrics.topk ort dcg_score
     >>> # we have groud-truth label of some answers to a query:
-    >>> relevancy_judgements = [1, 0, 0, 0]
-    >>> dcg_score(relevancy_judgements)
+    >>> relevance_judgements = [1, 0, 0, 0]
+    >>> dcg_score(relevance_judgements)
     1.0
     """
-    top = relevancy[..., :k]
+    top = relevance[..., :k]
     gains = (2 ** top - 1) / np.log2(np.arange(top.shape[-1]) + 2)[None, ...]
     return np.sum(gains * weights, axis=-1)
 
 
 def ndcg_score(relevant, k=20, weights=1.0):
     """Compute Normalized Discounted Cumulative Gain score(s) based on
-    `relevancy` judgements provided.
+    `relevance` judgements provided.
     Parameters
     ----------
-    relevancy : iterable or ndarray of shape (n_samples, n_labels) or simply
+    relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
     k : int, default=20
@@ -177,8 +177,8 @@ def ndcg_score(relevant, k=20, weights=1.0):
     --------
     >>> from irmetrics.topk ort dcg_score
     >>> # we have groud-truth label of some answers to a query:
-    >>> relevancy_judgements = [1, 0, 0, 0]
-    >>> ndcg_score(relevancy_judgements)
+    >>> relevance_judgements = [1, 0, 0, 0]
+    >>> ndcg_score(relevance_judgements)
     1.0
     """
     # Sort in descending order, calculate the gain
@@ -189,8 +189,8 @@ def ndcg_score(relevant, k=20, weights=1.0):
 
 
 @_ensure_io
-def ndcg(y_true, y_pred, k=20, relevancy=multilabel):
-    """Compute Discounted Cumulative Gain score(s) based on `relevancy`
+def ndcg(y_true, y_pred, k=20, relevance=multilabel):
+    """Compute Discounted Cumulative Gain score(s) based on `relevance`
     judgements provided.
     Parameters
     ----------
@@ -218,12 +218,12 @@ def ndcg(y_true, y_pred, k=20, relevancy=multilabel):
     >>> ndcg(y_true, y_pred)
     1.0
     """
-    relevant = relevancy(y_true, y_pred)
+    relevant = relevance(y_true, y_pred)
     return ndcg_score(relevant, k)
 
 
 @_ensure_io
-def ap(y_true, y_pred, k=20, relevancy=multilabel):
+def ap(y_true, y_pred, k=20, relevance=multilabel):
     """Compute Average Precision score(s).
     AP is an aproximation of the integral over PR-curve.
     Parameters
@@ -260,7 +260,7 @@ def ap(y_true, y_pred, k=20, relevancy=multilabel):
     >>> ap(y_true, y_pred)
     1.0
     """
-    relevant = relevancy(y_true, y_pred)
+    relevant = relevance(y_true, y_pred)
 
     ap = np.sum([
         np.array(
