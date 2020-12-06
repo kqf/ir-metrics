@@ -77,7 +77,7 @@ def iou(y_true, y_pred, k=20, relevancy=None, n_uniq=relevant_counts):
     if np.any(n_uniq(y_true, y_true) > 1):
         raise ValueError("y_true has duplicates along the last axis")
 
-    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+    relevant = relevancy(y_pred, y_true)
 
     # Approximate intersection
     intersection = (relevant).sum(axis=-1)
