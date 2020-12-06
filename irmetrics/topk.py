@@ -1,10 +1,11 @@
 import numpy as np
 
 from irmetrics.io import _ensure_io
+from irmetrics.relevancy import multilabel
 
 
 @_ensure_io
-def rr(y_true, y_pred, k=20):
+def rr(y_true, y_pred, k=20, relevancy=multilabel):
     """Compute Recirocal Rank(s).
     Calculate the recirocal of the index for the first matched item in
     ``y_pred``. The score is between 0 and 1.
@@ -39,13 +40,13 @@ def rr(y_true, y_pred, k=20):
     >>> rr(y_true, y_pred)
     0.5
     """
-    relevant = y_true == y_pred
+    relevant = relevancy(y_true, y_pred)
     index = relevant.argmax(-1)
     return relevant.any(-1) / (index + 1)
 
 
 @_ensure_io
-def recall(y_true, y_pred=None, ignore=None, k=20):
+def recall(y_true, y_pred=None, ignore=None, k=20, relevancy=multilabel):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
@@ -79,11 +80,11 @@ def recall(y_true, y_pred=None, ignore=None, k=20):
     >>> recall(y_true, y_pred)
     1.0
     """
-    return (y_true == y_pred).any(-1) / y_true.shape[-1]
+    return relevancy(y_true, y_pred).any(-1) / y_true.shape[-1]
 
 
 @_ensure_io
-def precision(y_true, y_pred=None, ignore=None, k=20):
+def precision(y_true, y_pred=None, ignore=None, k=20, relevancy=multilabel):
     """Compute Recall(s).
     and 1 otherwise.
     Check which fraction of ``y_pred`` is in ``y_true``.
@@ -117,7 +118,7 @@ def precision(y_true, y_pred=None, ignore=None, k=20):
     >>> precision(y_true, y_pred)
     0.25
     """
-    return (y_true == y_pred).any(-1) / y_pred.shape[-1]
+    return relevancy(y_true, y_pred).any(-1) / y_pred.shape[-1]
 
 
 def dcg_score(relevancy, k=None, weights=1.0):
@@ -188,7 +189,7 @@ def ndcg_score(relevant, k=20, weights=1.0):
 
 
 @_ensure_io
-def ndcg(y_true, y_pred, k=20):
+def ndcg(y_true, y_pred, k=20, relevancy=multilabel):
     """Compute Discounted Cumulative Gain score(s) based on `relevancy`
     judgements provided.
     Parameters
@@ -217,12 +218,12 @@ def ndcg(y_true, y_pred, k=20):
     >>> ndcg(y_true, y_pred)
     1.0
     """
-    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+    relevant = relevancy(y_true, y_pred)
     return ndcg_score(relevant, k)
 
 
 @_ensure_io
-def ap(y_true, y_pred, k=20):
+def ap(y_true, y_pred, k=20, relevancy=multilabel):
     """Compute Average Precision score(s).
     AP is an aproximation of the integral over PR-curve.
     Parameters
@@ -259,7 +260,7 @@ def ap(y_true, y_pred, k=20):
     >>> ap(y_true, y_pred)
     1.0
     """
-    relevant = (y_pred[:, :, None] == y_true[:, None]).any(axis=-1)
+    relevant = relevancy(y_true, y_pred)
 
     ap = np.sum([
         np.array(
