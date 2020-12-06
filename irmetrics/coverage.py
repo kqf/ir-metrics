@@ -36,7 +36,7 @@ def coverage(y_pred, padding=None):
 
 
 @_ensure_io
-def iou(y_true, y_pred, k=20):
+def iou(y_true, y_pred, k=20, relevancy=None):
     """Compute the approximate version of Intersection over Union.
     The approximation comes in assumption that `y_true` and `y_pred`
     contain only unique values.
