@@ -3,20 +3,23 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.6]
+## [0.1.0]
+
+### Removed
+- Removed the separate ranking module
+
+
 ### Added
 - Precision and ndcg scores
 - Small fixes to the docstrings
 - Add coverage and IoU scores
 - Add Average Precision score
 - Add support for custom relevance functions
+- The reciprocal rank and recall metrics
 
 ### Changed
 - Move readme to `.rst`
 - Simplify the `topk` tests
-
-### Added
-- The reciprocal rank and recall metrics
 
 ## [0.0.5]
 
