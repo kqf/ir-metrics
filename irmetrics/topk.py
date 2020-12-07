@@ -154,7 +154,8 @@ def dcg_score(relevance, k=None, weights=1.0):
     return np.sum(gains * weights, axis=-1)
 
 
-def ndcg_score(relevant, k=20, weights=1.0):
+@_ensure_io
+def ndcg(y_true, y_pred, k=20, relevance=multilabel, weights=1.):
     """Compute Normalized Discounted Cumulative Gain score(s) based on
     `relevance` judgements provided.
     Parameters
@@ -181,45 +182,13 @@ def ndcg_score(relevant, k=20, weights=1.0):
     >>> ndcg_score(relevance_judgements)
     1.0
     """
+    relevant = relevance(y_true, y_pred)
+
     # Sort in descending order, calculate the gain
     idcg = dcg_score(np.flip(np.sort(relevant, axis=-1), axis=-1), k, weights)
 
     # Normalize to the ideal dcg score
     return dcg_score(relevant, k) / idcg
-
-
-@_ensure_io
-def ndcg(y_true, y_pred, k=20, relevance=multilabel):
-    """Compute Discounted Cumulative Gain score(s) based on `relevance`
-    judgements provided.
-    Parameters
-    ----------
-    y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
-        True labels of entities to be ranked. In case of scalars ``y_pred``
-        should be of shape (1, n_labels).
-    y_pred : iterable, ndarray of shape (n_samples, n_labels)
-        Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
-        Only consider the highest k scores in the ranking. If None, use all
-        outputs.
-    Returns
-    -------
-    ndcg : np.array
-        The discounted cumulative gains for samples (or a single sample).
-    References
-    ----------
-    `Wikipedia entry for Discounted cumulative gain
-    <https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG>`_
-    Examples
-    --------
-    >>> from irmetrics.topk ort dcg_score
-    >>> # we have groud-truth label of some answers to a query:
-    >>> y_pred = [1, 0, 0, 0]
-    >>> ndcg(y_true, y_pred)
-    1.0
-    """
-    relevant = relevance(y_true, y_pred)
-    return ndcg_score(relevant, k)
 
 
 @_ensure_io

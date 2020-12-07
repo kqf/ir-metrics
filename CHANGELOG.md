@@ -5,6 +5,9 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ## [0.1.0]
 
+### Added
+- Flat module for the predefined relevance judgements
+
 ### Removed
 - Removed the separate ranking module
 
