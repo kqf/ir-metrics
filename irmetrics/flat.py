@@ -9,7 +9,7 @@ def _relevance(y_true, y_pred):
     return y_true
 
 
-def flat(df, query_col, relevance_col, measure, k=20):
+def flat(df, query_col, relevance_col, measure, k=None):
     """
     Calculate the corresponding measure for the data in flat format, with
     precalculated relevance judgements:
