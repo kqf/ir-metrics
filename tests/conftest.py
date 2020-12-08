@@ -68,14 +68,14 @@ _OUTPUTS = {
 
 @pytest.fixture
 def raw_outputs(measure):
-    return _OUTPUTS[measure]
+    return list(zip(*_OUTPUTS[measure]))
 
 
 @pytest.fixture
 def outputs(raw_outputs):
-    return zip(*raw_outputs)[0]
+    return raw_outputs[0]
 
 
 @pytest.fixture
 def expected(raw_outputs):
-    return zip(*raw_outputs)[1]
+    return raw_outputs[1]
