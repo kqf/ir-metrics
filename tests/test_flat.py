@@ -2,41 +2,36 @@ import pytest
 import numpy as np
 import pandas as pd
 from irmetrics.flat import flat
-from irmetrics.topk import ndcg
-
-
-EXAMPLES = [
-    ((3, 2, 3, 0, 1, 2), 0.948810748),
-    ((1, 0, 0, 0, 0, 0), 1.0),
-    ((0, 1, 0, 0, 0, 0), 0.630929753),
-    ((1, 1, 0, 0, 0, 0), 1.0),
-    ((0, 0, 0, 0, 0, 1), 0.356207187),
-    ((0, 0, 0, 0, 0, 0), np.NaN)
-]
+from irmetrics.topk import rr, recall, precision, ndcg, ap
 
 
 @pytest.fixture
-def data():
-    queries, answers = zip(*EXAMPLES)
+def data(inputs):
     # Explode the examples
     df = pd.DataFrame([
         {
             "query": i,
-            "relevance": rel,
+            "relevance": answer == prediction,
             "weights": 1,
         }
-        for i, relevance in enumerate(queries)
-        for rel in relevance
+        for i, (answer, predictions) in enumerate(inputs)
+        for prediction in predictions
     ])
-    return df, answers
+    return df
 
 
-def test_calculates_data(data):
-    df, answers = data
+@pytest.mark.parametrize("measure", [
+    rr,
+    recall,
+    precision,
+    ndcg,
+    # ap,
+])
+def test_calculates_data(data, outputs, expected, measure):
     outputs = flat(
-        df,
+        data,
         query_col="query",
         relevance_col="relevance",
-        measure=ndcg,
+        measure=measure,
     )
-    np.testing.assert_almost_equal(outputs.values, answers)
+    np.testing.assert_almost_equal(outputs.values, outputs)
