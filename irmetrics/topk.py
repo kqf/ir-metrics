@@ -5,7 +5,7 @@ from irmetrics.relevance import multilabel
 
 
 @_ensure_io
-def rr(y_true, y_pred, k=20, relevance=multilabel):
+def rr(y_true, y_pred, k=None, relevance=multilabel):
     """Compute Recirocal Rank(s).
     Calculate the recirocal of the index for the first matched item in
     ``y_pred``. The score is between 0 and 1.
@@ -19,7 +19,7 @@ def rr(y_true, y_pred, k=20, relevance=multilabel):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -46,7 +46,7 @@ def rr(y_true, y_pred, k=20, relevance=multilabel):
 
 
 @_ensure_io
-def recall(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
+def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
@@ -59,7 +59,7 @@ def recall(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -84,7 +84,7 @@ def recall(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
 
 
 @_ensure_io
-def precision(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
+def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     and 1 otherwise.
     Check which fraction of ``y_pred`` is in ``y_true``.
@@ -97,7 +97,7 @@ def precision(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -130,7 +130,7 @@ def dcg_score(relevance, k=None, weights=1.0):
         (n_labels,). The last dimension of the parameter is used as position.
     weights : default=1.0, scalar, iterable or ndarray of shape (n_samples,)
         takes into account the importance of each sample, if relevant.
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -155,7 +155,7 @@ def dcg_score(relevance, k=None, weights=1.0):
 
 
 @_ensure_io
-def ndcg(y_true, y_pred, k=20, relevance=multilabel, weights=1.):
+def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     """Compute Normalized Discounted Cumulative Gain score(s) based on
     `relevance` judgements provided.
     Parameters
@@ -163,7 +163,7 @@ def ndcg(y_true, y_pred, k=20, relevance=multilabel, weights=1.):
     relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -192,7 +192,7 @@ def ndcg(y_true, y_pred, k=20, relevance=multilabel, weights=1.):
 
 
 @_ensure_io
-def ap(y_true, y_pred, k=20, relevance=multilabel):
+def ap(y_true, y_pred, k=None, relevance=multilabel):
     """Compute Average Precision score(s).
     AP is an aproximation of the integral over PR-curve.
     Parameters
@@ -202,7 +202,7 @@ def ap(y_true, y_pred, k=20, relevance=multilabel):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs. The minimum between the nuber of correct answers and k will
         be used to compute the score.
@@ -231,11 +231,14 @@ def ap(y_true, y_pred, k=20, relevance=multilabel):
     """
     relevant = relevance(y_true, y_pred)
 
+    # Handle k=None, without if else branching
+    max_iter = min(i for i in (k, y_true.shape[-1]) if i is not None)
+
     ap = np.sum([
         np.array(
             precision(y_true, y_pred, ik + 1)
         )[..., None] * relevant[..., [ik]]
-        for ik in range(min(k, y_true.shape[-1]))
+        for ik in range(max_iter)
     ], axis=-1)
 
     return ap / y_pred.shape[-1]
