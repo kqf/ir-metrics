@@ -9,7 +9,7 @@ def to_scalar(x):
     return x
 
 
-def ensure_inputs(y_true, y_pred, k=20):
+def ensure_inputs(y_true, y_pred, k=None):
     y_true, y_pred = np.atleast_2d(y_true, y_pred)
 
     # np.atleast_2d adds a new axis as a batch dimension
