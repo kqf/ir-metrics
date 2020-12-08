@@ -7,10 +7,14 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ### Added
 - Flat module for the predefined relevance judgements
+- A simple example
 
 ### Removed
 - Removed the separate ranking module
 
+### Changed
+- The structure of tests
+- The default value of `k` is now `None`
 
 ### Added
 - Precision and ndcg scores
