@@ -72,10 +72,10 @@ def raw_outputs(measure):
 
 
 @pytest.fixture
-def outputs(raw_outputs):
+def expected(raw_outputs):
     return raw_outputs[0]
 
 
 @pytest.fixture
-def expected(raw_outputs):
+def exceptions(raw_outputs):
     return raw_outputs[1]

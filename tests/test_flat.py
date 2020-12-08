@@ -29,14 +29,14 @@ def data(inputs):
     # precision,
     # ap,
 ])
-def test_calculates_data(data, outputs, expected, measure):
-    out = flat(
+def test_calculates_data(data, expected, measure):
+    outputs = flat(
         data,
         query_col="query",
         relevance_col="relevance",
         measure=measure,
     )
-    np.testing.assert_almost_equal(out.values, outputs)
+    np.testing.assert_almost_equal(outputs.values, expected)
 
 
 """
@@ -55,7 +55,7 @@ EXAMPLES = [
 
 @pytest.fixture
 def nonbinary_data():
-    queries, answers = zip(*EXAMPLES)
+    queries, expected = zip(*EXAMPLES)
     # Explode the examples
     df = pd.DataFrame([
         {
@@ -66,15 +66,15 @@ def nonbinary_data():
         for i, relevance in enumerate(queries)
         for rel in relevance
     ])
-    return df, answers
+    return df, expected
 
 
 def test_nonbinary_ndcg(nonbinary_data):
-    df, answers = nonbinary_data
+    df, expected = nonbinary_data
     outputs = flat(
         df,
         query_col="query",
         relevance_col="relevance",
         measure=ndcg,
     )
-    np.testing.assert_almost_equal(outputs.values, answers)
+    np.testing.assert_almost_equal(outputs.values, expected)
