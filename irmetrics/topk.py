@@ -231,11 +231,14 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
     """
     relevant = relevance(y_true, y_pred)
 
+    # Handle k=None, without if else branching
+    max_iter = min(i for i in (k, y_true.shape[-1]) if i is not None)
+
     ap = np.sum([
         np.array(
             precision(y_true, y_pred, ik + 1)
         )[..., None] * relevant[..., [ik]]
-        for ik in range(min(k, y_true.shape[-1]))
+        for ik in range(max_iter)
     ], axis=-1)
 
     return ap / y_pred.shape[-1]

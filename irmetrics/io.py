@@ -26,7 +26,7 @@ def ensure_inputs(y_true, y_pred, k=None):
 
 def _ensure_io(f):
     @wraps(f)
-    def wrapper(y_true, y_pred, k=20, relevance=multilabel, **kwargs):
+    def wrapper(y_true, y_pred, k=None, relevance=multilabel, **kwargs):
         # Ensure (n_samples, n_labels) shapes for the inputs
         y_true_, y_pred_ = ensure_inputs(y_true, y_pred, k)
 
