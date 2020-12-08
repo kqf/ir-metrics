@@ -14,6 +14,21 @@ ir-metrics |build| |downloads|
 A set of the most common metrics in used in information retrieval.
 
 ============
+Usage
+============
+
+The metrics are designed to work for array-like structures and integers:
+
+.. code:: python 
+
+    >>> from irmetrics.topk import rr
+
+    >>> y_true = "apple"
+    >>> y_pred = ["banana", "apple", "grapes"]
+    >>> rr(y_true, y_pred)
+    0.5
+
+============
 Installation
 ============
 
