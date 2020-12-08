@@ -5,7 +5,7 @@ from irmetrics.relevance import multilabel
 
 
 @_ensure_io
-def rr(y_true, y_pred, k=20, relevance=multilabel):
+def rr(y_true, y_pred, k=None, relevance=multilabel):
     """Compute Recirocal Rank(s).
     Calculate the recirocal of the index for the first matched item in
     ``y_pred``. The score is between 0 and 1.
@@ -46,7 +46,7 @@ def rr(y_true, y_pred, k=20, relevance=multilabel):
 
 
 @_ensure_io
-def recall(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
+def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
@@ -84,7 +84,7 @@ def recall(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
 
 
 @_ensure_io
-def precision(y_true, y_pred=None, ignore=None, k=20, relevance=multilabel):
+def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     and 1 otherwise.
     Check which fraction of ``y_pred`` is in ``y_true``.
@@ -155,7 +155,7 @@ def dcg_score(relevance, k=None, weights=1.0):
 
 
 @_ensure_io
-def ndcg(y_true, y_pred, k=20, relevance=multilabel, weights=1.):
+def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     """Compute Normalized Discounted Cumulative Gain score(s) based on
     `relevance` judgements provided.
     Parameters
@@ -192,7 +192,7 @@ def ndcg(y_true, y_pred, k=20, relevance=multilabel, weights=1.):
 
 
 @_ensure_io
-def ap(y_true, y_pred, k=20, relevance=multilabel):
+def ap(y_true, y_pred, k=None, relevance=multilabel):
     """Compute Average Precision score(s).
     AP is an aproximation of the integral over PR-curve.
     Parameters
