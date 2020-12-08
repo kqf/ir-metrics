@@ -19,7 +19,7 @@ Usage
 
 The metrics are designed to work for array-like structures and integers:
 
-.. code:: python 
+.. code:: python
 
     >>> from irmetrics.topk import rr
     >>> y_true = "apple"
@@ -28,9 +28,10 @@ The metrics are designed to work for array-like structures and integers:
     0.5
 
 The same function works also for the matrix-like structures:
-.. code:: python 
 
-	>>> import numpy as np
+.. code:: python
+
+    >>> import numpy as np
     >>> from irmetrics.topk import rr
     >>> y_trues = np.repeat(y_true, 128)
     >>> y_preds = np.repeat([y_pred], 128, axis=0)
