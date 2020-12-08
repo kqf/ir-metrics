@@ -48,7 +48,7 @@ def iou(y_true, y_pred, k=20, relevance=None, n_uniq=relevant_counts):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns

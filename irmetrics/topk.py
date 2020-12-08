@@ -19,7 +19,7 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -59,7 +59,7 @@ def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -97,7 +97,7 @@ def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -130,7 +130,7 @@ def dcg_score(relevance, k=None, weights=1.0):
         (n_labels,). The last dimension of the parameter is used as position.
     weights : default=1.0, scalar, iterable or ndarray of shape (n_samples,)
         takes into account the importance of each sample, if relevant.
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -163,7 +163,7 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
@@ -202,7 +202,7 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
         should be of shape (1, n_labels).
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs. The minimum between the nuber of correct answers and k will
         be used to compute the score.

@@ -37,7 +37,7 @@ def flat(df, query_col, relevance_col, measure, k=20):
         The column that corresponds to relevance judgements.
     callable :  str
         The desired measure to be calculated (one from `irmetrics.topk`).
-    k : int, default=20
+    k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
     Returns
