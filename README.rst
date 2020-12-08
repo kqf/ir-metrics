@@ -29,6 +29,7 @@ The metrics are designed to work for array-like structures and integers:
 
 The same function works also for the matrix-like structures:
 .. code:: python 
+
 	>>> import numpy as np
     >>> from irmetrics.topk import rr
     >>> y_trues = np.repeat(y_true, 128)
