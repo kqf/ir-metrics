@@ -15,6 +15,7 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 ### Changed
 - The structure of tests
 - The default value of `k` is now `None`
+- Moved `pandas` to optional dependencies
 
 ### Added
 - Precision and ndcg scores
