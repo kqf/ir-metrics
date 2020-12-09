@@ -18,6 +18,9 @@ setup(
     packages=find_packages(),
     install_requires=[
         "numpy",
-        "pandas",
-    ]
+    ],
+    extras_require={
+        # Didn't come up with a better name
+        'pandas': ["pandas"],
+    },
 )
