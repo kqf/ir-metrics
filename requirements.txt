@@ -1,3 +1,5 @@
 setuptools
-pytest
 pandas
+pytest
+pytest-cov
+pytest-flake8

@@ -7,7 +7,7 @@ install:
   - pip install .
 
 script:
-  - pytest
+  - pytest --flake8 --cov=irmetrics/
 
 deploy:
   provider: pypi
