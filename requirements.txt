@@ -1,3 +1,4 @@
 setuptools
-pytest
 pandas
+pytest
+pytest-flake8
