@@ -29,11 +29,11 @@ def coverage(y_pred, padding=None):
     >>> y_pred = [0, None]
     >>> coverage(y_true)
     1
-    >>> y_pred = [None]
-    >>> coverage(y_true)
-    True
+    >>> coverage([-1], padding=-1)
+    0
     """
-    return to_scalar(np.not_equal(y_pred, padding).sum(axis=-1) > 0)
+    outputs = np.not_equal(y_pred, padding).sum(axis=-1) > 0
+    return to_scalar(outputs.astype(np.int32))
 
 
 @_ensure_io
