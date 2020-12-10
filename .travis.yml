@@ -4,10 +4,11 @@ python:
 
 install:
   - pip install -r requirements.txt
-  - pip install .
+  - pip install -e .
 
 script:
-  - pytest --flake8 --cov=irmetrics/
+  - pytest --flake8 --cov=irmetrics/ --doctest-modules 
+  - pytest --doctest-modules README.rst
 
 deploy:
   provider: pypi

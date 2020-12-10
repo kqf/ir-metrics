@@ -14,7 +14,7 @@ from irmetrics.coverage import coverage, iou
     ([0, None], 1),
     ([None], 0),
 ])
-def test_rr(y_pred, output, n_samples=128):
+def test_coverage(y_pred, output, n_samples=128):
     assert coverage(y_pred) == output
 
     # Now the vectorized output

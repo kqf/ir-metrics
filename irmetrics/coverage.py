@@ -29,11 +29,11 @@ def coverage(y_pred, padding=None):
     >>> y_pred = [0, None]
     >>> coverage(y_true)
     1
-    >>> y_pred = [None]
-    >>> coverage(y_true)
+    >>> coverage([-1], padding=-1)
     0
     """
-    return to_scalar(np.not_equal(y_pred, padding).sum(axis=-1) > 0)
+    outputs = np.not_equal(y_pred, padding).sum(axis=-1) > 0
+    return to_scalar(outputs.astype(np.int32))
 
 
 @_ensure_io
@@ -68,7 +68,7 @@ def iou(y_true, y_pred, k=None, relevance=None, n_uniq=relevant_counts):
     >>> # and the predicted labels by an IR system
     >>> y_pred = [0, 1, 4]
     >>> iou(y_true, y_pred)
-    1. / 3.
+    0.3333333333333333
     """
 
     if np.any(n_uniq(y_pred, y_true) > 1):

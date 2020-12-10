@@ -124,6 +124,11 @@ def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
 def dcg_score(relevance, k=None, weights=1.0):
     """Compute Discounted Cumulative Gain score(s) based on `relevance`
     judgements provided.
+
+    This is provided as internal implementation for `ndcg` for this reason
+    the API for this function slightly differ: it alawyas accepts  and
+    outputs `np.arrays`, unlike other methos in this module.
+
     Parameters
     ----------
     relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
@@ -143,11 +148,17 @@ def dcg_score(relevance, k=None, weights=1.0):
     <https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Discounted_Cumulative_Gain>`_
     Examples
     --------
-    >>> from irmetrics.topk ort dcg_score
+    >>> from irmetrics.topk import dcg_score
     >>> # we have groud-truth label of some answers to a query:
-    >>> relevance_judgements = [1, 0, 0, 0]
+    >>> relevance_judgements = np.array([[1, 0, 0, 0]])
     >>> dcg_score(relevance_judgements)
-    1.0
+    array([1.])
+    >>> relevance_judgements = np.array([[True, False, False, False]])
+    >>> dcg_score(relevance_judgements)
+    array([1.])
+    >>> relevance_judgements = np.array([[False, True, False, False]])
+    >>> dcg_score(relevance_judgements)
+    array([0.63092975])
     """
     top = relevance[..., :k]
     gains = (2 ** top - 1) / np.log2(np.arange(top.shape[-1]) + 2)[None, ...]
@@ -176,11 +187,17 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     <https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG>`_
     Examples
     --------
-    >>> from irmetrics.topk ort dcg_score
+    >>> from irmetrics.topk import ndcg
     >>> # we have groud-truth label of some answers to a query:
-    >>> relevance_judgements = [1, 0, 0, 0]
-    >>> ndcg_score(relevance_judgements)
-    1.0
+    >>> y_true = [1, 2]
+    >>> y_pred = [0, 1, 0, 0]
+    >>> ndcg(y_true, y_pred)
+    0.6309297535714575
+    >>> # the order of y_true labels doesn't matter
+    >>> y_true = [2, 1]
+    >>> y_pred = [0, 1, 0, 0]
+    >>> ndcg(y_true, y_pred)
+    0.6309297535714575
     """
     relevant = relevance(y_true, y_pred)
 
@@ -208,7 +225,7 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
         be used to compute the score.
     Returns
     -------
-    ap : float in [0., 1.]
+    ap : float
         The average precision for a given sample.
     References
     ----------
@@ -222,12 +239,13 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
     >>> # and the predicted labels by an IR system
     >>> y_pred = [1, 0, 0]
     >>> ap(y_true, y_pred)
-    1.0
+    0.3333333333333333
+    >>> # This should be fixed
     >>> y_true = [1, 4, 5]
     >>> # and the predicted labels by an IR system
     >>> y_pred = [1, 2, 3, 4, 5]
     >>> ap(y_true, y_pred)
-    1.0
+    array([0.2, 0. , 0. ])
     """
     relevant = relevance(y_true, y_pred)
 
