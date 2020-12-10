@@ -7,7 +7,8 @@ install:
   - pip install -e .
 
 script:
-  - pytest --flake8 --doctest-modules 
+  - pytest --flake8 --cov=irmetrics/ --doctest-modules 
+  - pytest --doctest-modules README.rst
 
 deploy:
   provider: pypi
