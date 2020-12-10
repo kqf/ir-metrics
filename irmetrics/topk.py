@@ -124,6 +124,11 @@ def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
 def dcg_score(relevance, k=None, weights=1.0):
     """Compute Discounted Cumulative Gain score(s) based on `relevance`
     judgements provided.
+
+    This is provided as internal implementation for `ndcg` for this reason
+    the API for this function slightly differ: it alawyas accepts  and
+    outputs `np.arrays`, unlike other methos in this module.
+
     Parameters
     ----------
     relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
@@ -145,9 +150,15 @@ def dcg_score(relevance, k=None, weights=1.0):
     --------
     >>> from irmetrics.topk import dcg_score
     >>> # we have groud-truth label of some answers to a query:
-    >>> relevance_judgements = [1, 0, 0, 0]
+    >>> relevance_judgements = np.array([[1, 0, 0, 0]])
     >>> dcg_score(relevance_judgements)
-    1.0
+        array([1.])
+    >>> relevance_judgements = np.array([[True, False, False, False]])
+    >>> dcg_score(relevance_judgements)
+        array([1.])
+    >>> relevance_judgements = np.array([[False, True, False, False]])
+    >>> dcg_score(relevance_judgements)
+        array([0.63092975])
     """
     top = relevance[..., :k]
     gains = (2 ** top - 1) / np.log2(np.arange(top.shape[-1]) + 2)[None, ...]
