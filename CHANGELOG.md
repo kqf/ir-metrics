@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1]
+
+### Added
+- More tests
+- Coverage reports
+- flake8 linting checks
+- Docstring tests
+
+### Changed
+- Some docstring examples
+
 ## [0.1.0]
 
 ### Added
@@ -16,6 +27,8 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 - The structure of tests
 - The default value of `k` is now `None`
 - Moved `pandas` to optional dependencies
+
+## [0.0.6]
 
 ### Added
 - Precision and ndcg scores
