@@ -152,13 +152,13 @@ def dcg_score(relevance, k=None, weights=1.0):
     >>> # we have groud-truth label of some answers to a query:
     >>> relevance_judgements = np.array([[1, 0, 0, 0]])
     >>> dcg_score(relevance_judgements)
-        array([1.])
+    array([1.])
     >>> relevance_judgements = np.array([[True, False, False, False]])
     >>> dcg_score(relevance_judgements)
-        array([1.])
+    array([1.])
     >>> relevance_judgements = np.array([[False, True, False, False]])
     >>> dcg_score(relevance_judgements)
-        array([0.63092975])
+    array([0.63092975])
     """
     top = relevance[..., :k]
     gains = (2 ** top - 1) / np.log2(np.arange(top.shape[-1]) + 2)[None, ...]
@@ -225,7 +225,7 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
         be used to compute the score.
     Returns
     -------
-    ap : float in [0., 1.]
+    ap : float
         The average precision for a given sample.
     References
     ----------
@@ -239,12 +239,13 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
     >>> # and the predicted labels by an IR system
     >>> y_pred = [1, 0, 0]
     >>> ap(y_true, y_pred)
-    1.0
+    0.3333333333333333
+    >>> # This should be fixed
     >>> y_true = [1, 4, 5]
     >>> # and the predicted labels by an IR system
     >>> y_pred = [1, 2, 3, 4, 5]
     >>> ap(y_true, y_pred)
-    1.0
+    array([0.2, 0. , 0. ])
     """
     relevant = relevance(y_true, y_pred)
 
