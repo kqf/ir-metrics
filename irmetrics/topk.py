@@ -143,7 +143,7 @@ def dcg_score(relevance, k=None, weights=1.0):
     <https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Discounted_Cumulative_Gain>`_
     Examples
     --------
-    >>> from irmetrics.topk ort dcg_score
+    >>> from irmetrics.topk import dcg_score
     >>> # we have groud-truth label of some answers to a query:
     >>> relevance_judgements = [1, 0, 0, 0]
     >>> dcg_score(relevance_judgements)
@@ -176,11 +176,17 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     <https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG>`_
     Examples
     --------
-    >>> from irmetrics.topk ort dcg_score
+    >>> from irmetrics.topk import ndcg
     >>> # we have groud-truth label of some answers to a query:
-    >>> relevance_judgements = [1, 0, 0, 0]
-    >>> ndcg_score(relevance_judgements)
-    1.0
+    >>> y_true = [1, 2]
+    >>> y_pred = [0, 1, 0, 0]
+    >>> ndcg(y_true, y_pred)
+    0.6309297535714575
+    >>> # the order of y_true labels doesn't matter
+    >>> y_true = [2, 1]
+    >>> y_pred = [0, 1, 0, 0]
+    >>> ndcg(y_true, y_pred)
+    0.6309297535714575
     """
     relevant = relevance(y_true, y_pred)
 
