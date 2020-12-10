@@ -10,6 +10,9 @@ script:
   - pytest --flake8 --cov=irmetrics/ --doctest-modules 
   - pytest --doctest-modules README.rst
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
 deploy:
   provider: pypi
   user: "__token__"
