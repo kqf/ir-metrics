@@ -4,3 +4,4 @@
 .eggs
 .python-version
 .coverage
+.idea
