@@ -20,7 +20,7 @@ def coverage(y_pred, padding=None):
     Examples
     --------
     >>> from irmetrics.topk import rr
-    >>> # we have groud-truth label of some answers to a query:
+    >>> # we have ground-truth label of some answers to a query:
     >>> y_true = 1
     >>> # and the predicted labels by an IR system
     >>> y_pred = [0, 1, 4]
@@ -63,7 +63,7 @@ def iou(y_true, y_pred, k=None, relevance=None, n_uniq=relevant_counts):
     Examples
     --------
     >>> from irmetrics.topk import rr
-    >>> # we have groud-truth label of some answers to a query:
+    >>> # we have ground-truth label of some answers to a query:
     >>> y_true = 1
     >>> # and the predicted labels by an IR system
     >>> y_pred = [0, 1, 4]

@@ -25,7 +25,7 @@ def unilabel(y_true, y_pred):
     --------
     >>> import numpy as np
     >>> from irmetrics.relevance import unilabel
-    >>> # groud-truth label of some answers to a query:
+    >>> # ground-truth label of some answers to a query:
     >>> y_true = np.array([[1]]) # (1, 1)
     >>> # and the predicted labels by an IR system
     >>> y_pred = np.array([[0, 1, 4]]) # (1, 3)
@@ -60,7 +60,7 @@ def multilabel(y_true, y_pred):
     --------
     >>> import numpy as np
     >>> from irmetrics.relevance import multilabel
-    >>> # groud-truth label of some answers to a query:
+    >>> # ground-truth label of some answers to a query:
     >>> y_true = np.array([[1]]) # (1, 1)
     >>> # and the predicted labels by an IR system
     >>> y_pred = np.array([[0, 1, 4]]) # (1, 3)
@@ -97,7 +97,7 @@ def relevant_counts(y_pred, y_true):
     --------
     >>> import numpy as np
     >>> from irmetrics.relevance import relevant_counts
-    >>> # groud-truth label of some answers to a query:
+    >>> # ground-truth label of some answers to a query:
     >>> y_true = np.array([[1]]) # (1, 1)
     >>> # and the predicted labels by an IR system
     >>> y_pred = np.array([[0, 1, 4]]) # (1, 3)
@@ -108,7 +108,7 @@ def relevant_counts(y_pred, y_true):
     >>> relevant_counts(y_true, y_pred)
     array([[1],
            [1]])
-    >>> # Now the relevant_co  unts case:
+    >>> # Now the `relevant_counts` case:
     >>> y_true = np.array([[1, 4]]) # (1, 2)
     >>> y_pred = np.array([[0, 1, 4]]) # (1, 3)
     >>> relevant_counts(y_true, y_pred)
