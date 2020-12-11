@@ -12,7 +12,7 @@ def to_scalar(x):
 def ensure_inputs(y_true, y_pred, k=None):
     y_true, y_pred = np.atleast_2d(y_true, y_pred)
 
-    # np.atleast_2d adds a new axis as a batch dimension
+    # `np.atleast_2d` adds a new axis as a batch dimension
     # thus y_pred[n_samples] is converted to y_pred[1, n_samples]
     # In other words, this condition allows passing y_true of [n_samples,]
     if y_true.shape[0] == 1 and y_true.shape[1] == y_pred.shape[0]:

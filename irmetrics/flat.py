@@ -4,7 +4,7 @@ from functools import partial
 def _relevance(y_true, y_pred):
     """
     Returns `y_true` as relevance judgements.
-    This is a helper function to adjust convert the inputs for topk metrics.
+    This is a helper function to adjust convert the inputs for top-k metrics.
     """
     return y_true
 
