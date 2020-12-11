@@ -12,10 +12,9 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 - Docstring tests
 
 ### Changed
+- Some docstring examples
 - Fixed typos in the docstrings
 
-### Changed
-- Some docstring examples
 
 ## [0.1.0]
 
