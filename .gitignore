@@ -5,3 +5,7 @@
 .python-version
 .coverage
 .idea
+
+# CI-builds
+coverage.xml
+dist/
