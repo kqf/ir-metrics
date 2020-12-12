@@ -1,5 +1,5 @@
 ir-metrics |build| |downloads| |codecov|
-------------------------------
+----------------------------------------
 
 .. |build| image:: https://travis-ci.com/kqf/ir-metrics.svg?branch=master
     :alt: Build Status
