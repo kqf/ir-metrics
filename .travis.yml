@@ -7,8 +7,8 @@ install:
   - pip install .
 
 script:
- - pytest --flake8 --cov=irmetrics/
- - pytest --doctest-modules README.rst irmetrics/
+  - pytest --flake8 --cov=irmetrics/
+  - pytest --doctest-modules README.rst irmetrics/
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
