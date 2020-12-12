@@ -252,6 +252,9 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
     # Handle k=None, without if else branching
     max_iter = min(i for i in (k, y_true.shape[-1]) if i is not None)
 
+    if max_iter is None:
+        raise IOError()
+
     ap = np.sum([
         np.array(
             precision(y_true, y_pred, ik + 1)
