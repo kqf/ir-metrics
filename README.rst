@@ -11,7 +11,7 @@ ir-metrics |build| |downloads| |codecov|
     :scale: 100%
     :target: https://img.shields.io/pypi/dm/ir-metrics
 
-.. |codecov| image:: https://codecov.io/gh/kqf/ir-metrics/branch/master/graph/badge.svg?token=Y226L3PGEX
+.. |codecov| image:: https://codecov.io/gh/kqf/ir-metrics/branch/master/graph/badge.svg?token=Ow1NHryfq8
     :alt: Code Coverage
     :scale: 100%
     :target: https://codecov.io/gh/kqf/ir-metrics
