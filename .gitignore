@@ -5,6 +5,3 @@
 .python-version
 .coverage
 .idea
-
-# CI-builds
-dist/
