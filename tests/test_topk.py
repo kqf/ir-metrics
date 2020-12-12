@@ -10,6 +10,7 @@ def cases(inputs, expected, exceptions):
     return zip(inputs, expected, exceptions)
 
 
+@pytest.mark.skip()
 @pytest.mark.parametrize("measure", [
     rr,
     recall,
@@ -30,6 +31,7 @@ def test_all(cases, measure, relevance):
             )
 
 
+@pytest.mark.skip()
 @pytest.mark.parametrize("measure", [
     rr,
     recall,
