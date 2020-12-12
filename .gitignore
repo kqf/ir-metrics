@@ -7,5 +7,4 @@
 .idea
 
 # CI-builds
-coverage.xml
 dist/
