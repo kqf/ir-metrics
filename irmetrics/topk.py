@@ -22,6 +22,9 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     rr : float in [0., 1.]
@@ -64,6 +67,9 @@ def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     rr : bool in [True, False]
@@ -106,6 +112,9 @@ def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     rr : bool in [True, False]
@@ -148,6 +157,9 @@ def dcg_score(relevance, k=None, weights=1.0):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     dcg : np.array
@@ -189,6 +201,9 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     ndcg : np.array
@@ -237,6 +252,9 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
         Only consider the highest k scores in the ranking. If None, use all
         outputs. The minimum between the nuber of correct answers and k will
         be used to compute the score.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     ap : float
