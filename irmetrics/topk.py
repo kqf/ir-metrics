@@ -33,9 +33,11 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
     Examples
     --------
     >>> from irmetrics.topk import rr
-    >>> # we have ground-truth label of some answers to a query:
+
     >>> y_true = 1
-    >>> # and the predicted labels by an IR system
+
+    and the predicted labels by an IR system:
+
     >>> y_pred = [0, 1, 4]
     >>> rr(y_true, y_pred)
     0.5
@@ -73,9 +75,13 @@ def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     Examples
     --------
     >>> from irmetrics.topk import recall
-    >>> # we have ground-truth label of some answers to a query:
+
+    for ground-truth labels related to a query:
+
     >>> y_true = 1
-    >>> # and the predicted labels by an IR system
+
+    and the predicted labels by an IR system:
+
     >>> y_pred = [0, 1, 4]
     >>> recall(y_true, y_pred)
     1.0
@@ -111,9 +117,13 @@ def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     Examples
     --------
     >>> from irmetrics.topk import recall
-    >>> # we have ground-truth label of some answers to a query:
+
+    for ground-truth labels related to a query:
+
     >>> y_true = 1
-    >>> # and the predicted labels by an IR system
+
+    and the predicted labels by an IR system:
+
     >>> y_pred = [0, 1, 4, 3]
     >>> precision(y_true, y_pred)
     0.25
@@ -149,7 +159,9 @@ def dcg_score(relevance, k=None, weights=1.0):
     Examples
     --------
     >>> from irmetrics.topk import dcg_score
-    >>> # we have ground-truth label of some answers to a query:
+
+    for ground-truth labels related to a query:
+
     >>> relevance_judgements = np.array([[1, 0, 0, 0]])
     >>> dcg_score(relevance_judgements)
     array([1.])
@@ -188,7 +200,9 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     Examples
     --------
     >>> from irmetrics.topk import ndcg
-    >>> # we have ground-truth label of some answers to a query:
+
+    for ground-truth labels related to a query:
+
     >>> y_true = [1, 2]
     >>> y_pred = [0, 1, 0, 0]
     >>> ndcg(y_true, y_pred)
@@ -234,15 +248,21 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
     Examples
     --------
     >>> from irmetrics.topk import ap
-    >>> # we have ground-truth label of some answers to a query:
+
+    for ground-truth labels related to a query:
+
     >>> y_true = 1
-    >>> # and the predicted labels by an IR system
+
+    and the predicted labels by an IR system:
+
     >>> y_pred = [1, 0, 0]
     >>> ap(y_true, y_pred)
     0.3333333333333333
     >>> # This should be fixed
     >>> y_true = [1, 4, 5]
-    >>> # and the predicted labels by an IR system
+
+    and the predicted labels by an IR system:
+
     >>> y_pred = [1, 2, 3, 4, 5]
     >>> ap(y_true, y_pred)
     array([0.2, 0. , 0. ])

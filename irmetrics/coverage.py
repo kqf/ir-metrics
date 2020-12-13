@@ -1,6 +1,6 @@
 import numpy as np
 from irmetrics.io import to_scalar, _ensure_io
-from irmetrics.relevance import relevant_counts
+from irmetrics.relevance import multilabel, relevant_counts
 
 
 def coverage(y_pred, padding=None):
@@ -20,9 +20,13 @@ def coverage(y_pred, padding=None):
     Examples
     --------
     >>> from irmetrics.topk import rr
-    >>> # we have ground-truth label of some answers to a query:
+
+    for gound-truth labels related to some query
+
     >>> y_true = 1
-    >>> # and the predicted labels by an IR system
+
+    and the predicted labels by an IR system:
+
     >>> y_pred = [0, 1, 4]
     >>> coverage(y_true)
     1
@@ -37,7 +41,7 @@ def coverage(y_pred, padding=None):
 
 
 @_ensure_io
-def iou(y_true, y_pred, k=None, relevance=None, n_uniq=relevant_counts):
+def iou(y_true, y_pred, k=None, relevance=multilabel, n_uniq=relevant_counts):
     """Compute the approximate version of Intersection over Union.
     The approximation comes in assumption that `y_true` and `y_pred`
     contain only unique values.
@@ -49,8 +53,12 @@ def iou(y_true, y_pred, k=None, relevance=None, n_uniq=relevant_counts):
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
     k : int, default=None
-        Only consider the highest k scores in the ranking. If None, use all
-        outputs.
+        Has no effect provided only for api compatibility.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
+    n_uniq : callable, default=topk.relevance.relevant_counts
+        A function that calculates number of unique labels per query.
     Returns
     -------
     iou : float in [0., 1.]
@@ -63,9 +71,13 @@ def iou(y_true, y_pred, k=None, relevance=None, n_uniq=relevant_counts):
     Examples
     --------
     >>> from irmetrics.topk import rr
-    >>> # we have ground-truth label of some answers to a query:
+
+    for ground-truth labels related to a query:
+
     >>> y_true = 1
-    >>> # and the predicted labels by an IR system
+
+    and the predicted labels by an IR system:
+
     >>> y_pred = [0, 1, 4]
     >>> iou(y_true, y_pred)
     0.3333333333333333
@@ -80,7 +92,7 @@ def iou(y_true, y_pred, k=None, relevance=None, n_uniq=relevant_counts):
     relevant = relevance(y_pred, y_true)
 
     # Approximate intersection
-    intersection = (relevant).sum(axis=-1)
+    intersection = relevant.sum(axis=-1)
 
     # Approximate union
     union = (y_pred.shape[-1] + y_true.shape[-1] - intersection)
