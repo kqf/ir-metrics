@@ -51,7 +51,7 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
 
 
 @_ensure_io
-def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
+def recall(y_true, y_pred=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
@@ -96,7 +96,7 @@ def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
 
 
 @_ensure_io
-def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
+def precision(y_true, y_pred=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     and 1 otherwise.
     Check which fraction of ``y_pred`` is in ``y_true``.
@@ -152,6 +152,7 @@ def dcg_score(relevance, k=None, weights=1.0):
     ----------
     relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
+        The relevance judgements provided by experts.
     weights : default=1.0, scalar, iterable or ndarray of shape (n_samples,)
         takes into account the importance of each sample, if relevant.
     k : int, default=None
@@ -198,6 +199,7 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     y_true : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
+        Target labels sorted by relevance (as returned by an IR system).
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
