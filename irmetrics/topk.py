@@ -195,12 +195,14 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     `relevance` judgements provided.
     Parameters
     ----------
-    relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
+    y_true : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    weights : float, iterable, ndarray, default=1.0
+        Represents the weights of each sample.
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
