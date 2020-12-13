@@ -22,6 +22,9 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     rr : float in [0., 1.]
@@ -48,7 +51,7 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
 
 
 @_ensure_io
-def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
+def recall(y_true, y_pred=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
@@ -64,6 +67,9 @@ def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     rr : bool in [True, False]
@@ -90,7 +96,7 @@ def recall(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
 
 
 @_ensure_io
-def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
+def precision(y_true, y_pred=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     and 1 otherwise.
     Check which fraction of ``y_pred`` is in ``y_true``.
@@ -106,6 +112,9 @@ def precision(y_true, y_pred=None, ignore=None, k=None, relevance=multilabel):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     rr : bool in [True, False]
@@ -143,11 +152,15 @@ def dcg_score(relevance, k=None, weights=1.0):
     ----------
     relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
+        The relevance judgements provided by experts.
     weights : default=1.0, scalar, iterable or ndarray of shape (n_samples,)
         takes into account the importance of each sample, if relevant.
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     dcg : np.array
@@ -183,12 +196,18 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     `relevance` judgements provided.
     Parameters
     ----------
-    relevance : iterable or ndarray of shape (n_samples, n_labels) or simply
+    y_true : iterable or ndarray of shape (n_samples, n_labels) or simply
         (n_labels,). The last dimension of the parameter is used as position.
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
+        Target labels sorted by relevance (as returned by an IR system).
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+    weights : float, iterable, ndarray, default=1.0
+        Represents the weights of each sample.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     ndcg : np.array
@@ -237,6 +256,9 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
         Only consider the highest k scores in the ranking. If None, use all
         outputs. The minimum between the nuber of correct answers and k will
         be used to compute the score.
+    relevance : callable, default=topk.relevance.multilabel
+        A function that calculates relevance judgements based on input
+        ``y_pred`` and ``y_true``.
     Returns
     -------
     ap : float

@@ -1,5 +1,6 @@
 setuptools
 pandas
+numpy
 pytest
 pytest-cov
 pytest-flake8
