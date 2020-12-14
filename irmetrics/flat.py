@@ -35,8 +35,9 @@ def flat(df, query_col, relevance_col, measure, k=None):
         The column that corresponds to query identificator.
     relevance_col :  str
         The column that corresponds to relevance judgements.
-    callable :  str
+    measure :  callable
         The desired measure to be calculated (one from `irmetrics.topk`).
+        Currently, only ``topk.ndcg`` and ``topk.rr` are supported.
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
