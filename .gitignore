@@ -9,3 +9,4 @@
 # CI-builds
 coverage.xml
 dist/
+docs/_build
