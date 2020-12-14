@@ -1,6 +1,5 @@
-ir-metrics |build| |downloads| |codecov|
-----------------------------------------
-
+ir-metrics |build| |downloads|
+------------------------------
 .. |build| image:: https://travis-ci.com/kqf/ir-metrics.svg?branch=master
     :alt: Build Status
     :scale: 100%
@@ -10,11 +9,6 @@ ir-metrics |build| |downloads| |codecov|
     :alt: PyPi downloads
     :scale: 100%
     :target: https://img.shields.io/pypi/dm/ir-metrics
-
-.. |codecov| image:: https://codecov.io/gh/kqf/ir-metrics/branch/master/graph/badge.svg?token=Ow1NHryfq8
-    :alt: Code Coverage
-    :scale: 100%
-    :target: https://codecov.io/gh/kqf/ir-metrics
 
 A set of the most common metrics in used in information retrieval.
 
