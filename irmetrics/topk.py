@@ -231,9 +231,9 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
 
     References
     ----------
-    `Wikipedia entry for Discounted cumulative gain
+    `Wikipedia entry for normalized discounted cumulative gain
     <https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG>`_
-ß
+
     Examples
     --------
     >>> from irmetrics.topk import ndcg
