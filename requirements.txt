@@ -9,3 +9,4 @@ pallets-sphinx-themes
 sphinxcontrib-log-cabinet
 sphinx-issues
 sphinx-tabs
+numpydoc
