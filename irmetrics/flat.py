@@ -3,8 +3,13 @@ from functools import partial
 
 def _relevance(y_true, y_pred):
     """
-    Returns `y_true` as relevance judgements.
     This is a helper function to adjust convert the inputs for top-k metrics.
+
+    Returns
+    -------
+    y_true : ndarray
+        Passes through the this parameter unchanged.
+
     """
     return y_true
 
@@ -41,10 +46,12 @@ def flat(df, query_col, relevance_col, measure, k=None):
     k : int, default=None
         Only consider the highest k scores in the ranking. If None, use all
         outputs.
+
     Returns
     -------
     measures : pandas.core.series.Series
         The values of the corresponding measure calculated per each query.
+
     Examples
     --------
     >>> import pandas as pd

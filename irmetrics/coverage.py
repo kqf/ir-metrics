@@ -63,6 +63,7 @@ def iou(y_true, y_pred, k=None, relevance=multilabel, n_uniq=relevant_counts):
         ``y_pred`` and ``y_true``.
     n_uniq : callable, default=topk.relevance.relevant_counts
         A function that calculates number of unique labels per query.
+
     Returns
     -------
     iou : float in [0., 1.]
@@ -73,6 +74,7 @@ def iou(y_true, y_pred, k=None, relevance=multilabel, n_uniq=relevant_counts):
     ----------
     `Wikipedia entry for Jaccard Index
     <https://en.wikipedia.org/wiki/Jaccard_index>`_
+
     Examples
     --------
     >>> from irmetrics.topk import rr
