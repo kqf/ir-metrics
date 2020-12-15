@@ -13,14 +13,17 @@ def unilabel(y_true, y_pred):
         Ground true labels for a given query (as returned by an IR system).
     y_pred : ndarray of shape (n_samples, n_labels), where `n_samples >= 1`
         Target labels sorted by relevance (as returned by an IR system).
+
     Returns
     -------
     relevance : bolean ndarray
         The relevance judgements for `y_pred` of shape (n_samples, 1)
+
     Raises
     -------
     ValueError
         If `y_true` has last dimension larger than 1 (multilabel case).
+
     Examples
     --------
     >>> import numpy as np
@@ -47,6 +50,7 @@ def unilabel(y_true, y_pred):
 
 def multilabel(y_true, y_pred):
     """Compute relevance(s) of predicted labels.
+
     Parameters
     ----------
     y_true : ndarray of shape (n_samples, n_true), where `n_samples >= 1`
@@ -54,10 +58,12 @@ def multilabel(y_true, y_pred):
     y_pred : ndarray of shape (n_samples, n_labels), where `n_samples >= 1`
         Target labels sorted by relevance (as returned by an IR system).
         The `n_labels` and `n_true` may not be the same.
+
     Returns
     -------
     relevance : bolean ndarray
         The relevance judgements for `y_pred` of shape (n_samples, n_labels)
+
     Examples
     --------
     >>> import numpy as np

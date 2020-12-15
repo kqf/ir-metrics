@@ -40,7 +40,6 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
     Examples
     --------
     >>> from irmetrics.topk import rr
-
     >>> y_true = 1
 
     and the predicted labels by an IR system:
