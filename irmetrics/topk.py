@@ -12,6 +12,7 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
 
     This ranking metric yields a high value if true labels are ranked high by
     ``y_pred``.
+
     Parameters
     ----------
     y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
@@ -25,14 +26,17 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
+
     Returns
     -------
     rr : float in [0., 1.]
         The recirocal ranks for all samples.
+
     References
     ----------
     `Wikipedia entry for Mean reciprocal rank
     <https://en.wikipedia.org/wiki/Mean_reciprocal_rank>`_
+
     Examples
     --------
     >>> from irmetrics.topk import rr
@@ -57,6 +61,7 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel):
     This is the binary score, 0 -- all predictionss are irrelevant
     and 1 otherwise.
     This definition of recall is equivalent to accuracy@k.
+
     Parameters
     ----------
     y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
@@ -70,14 +75,17 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel):
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
+
     Returns
     -------
     rr : bool in [True, False]
         The relevances for all samples.
+
     References
     ----------
     `Wikipedia entry for precision and recall
     <https://en.wikipedia.org/wiki/Precision_and_recall>`_
+
     Examples
     --------
     >>> from irmetrics.topk import recall
@@ -102,6 +110,7 @@ def precision(y_true, y_pred=None, k=None, relevance=multilabel):
     Check which fraction of ``y_pred`` is in ``y_true``.
     **NB**: When passing ``y_pred` of shape `[n_samples, n_outputs]`
     the result is quivalent to `recall(y_pred, y_true) / n_outputs`.
+
     Parameters
     ----------
     y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
@@ -115,14 +124,17 @@ def precision(y_true, y_pred=None, k=None, relevance=multilabel):
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
+
     Returns
     -------
     rr : bool in [True, False]
         The relevances for all samples.
+
     References
     ----------
     `Wikipedia entry for precision and recall
     <https://en.wikipedia.org/wiki/Precision_and_recall>`_
+
     Examples
     --------
     >>> from irmetrics.topk import recall
@@ -161,14 +173,17 @@ def dcg_score(relevance, k=None, weights=1.0):
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
+
     Returns
     -------
     dcg : np.array
         The discounted cumulative gains for samples (or a single sample).
+
     References
     ----------
     `Wikipedia entry for Discounted cumulative gain
     <https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Discounted_Cumulative_Gain>`_
+
     Examples
     --------
     >>> from irmetrics.topk import dcg_score
@@ -194,6 +209,7 @@ def dcg_score(relevance, k=None, weights=1.0):
 def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     """Compute Normalized Discounted Cumulative Gain score(s) based on
     `relevance` judgements provided.
+
     Parameters
     ----------
     y_true : iterable or ndarray of shape (n_samples, n_labels) or simply
@@ -208,14 +224,17 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
+
     Returns
     -------
     ndcg : np.array
         The discounted cumulative gains for samples (or a single sample).
+
     References
     ----------
     `Wikipedia entry for Discounted cumulative gain
     <https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG>`_
+ß
     Examples
     --------
     >>> from irmetrics.topk import ndcg
@@ -245,6 +264,7 @@ def ndcg(y_true, y_pred, k=None, relevance=multilabel, weights=1.):
 def ap(y_true, y_pred, k=None, relevance=multilabel):
     """Compute Average Precision score(s).
     AP is an aproximation of the integral over PR-curve.
+
     Parameters
     ----------
     y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
@@ -259,14 +279,17 @@ def ap(y_true, y_pred, k=None, relevance=multilabel):
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
+
     Returns
     -------
     ap : float
         The average precision for a given sample.
+
     References
     ----------
     `Wikipedia entry for Mean Average Precision
     <https://en.wikipedia.org/wiki/Evaluation_measures_(information_retrieval)#Mean_average_precision>`_
+
     Examples
     --------
     >>> from irmetrics.topk import ap
