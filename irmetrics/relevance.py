@@ -92,6 +92,7 @@ def multilabel(y_true, y_pred):
 
 def relevant_counts(y_pred, y_true):
     """Calculate the total number of relevant items.
+
     Parameters
     ----------
     y_true : ndarray of shape (n_samples, n_true), where `n_samples >= 1`
@@ -99,10 +100,12 @@ def relevant_counts(y_pred, y_true):
     y_pred : ndarray of shape (n_samples, n_labels), where `n_samples >= 1`
         Target labels sorted by relevance (as returned by an IR system).
         The `n_labels` and `n_true` may not be the same.
+
     Returns
     -------
     relevance_counts: ndarray
         The number of true relevance judgements for `y_pred`.
+
     Examples
     --------
     >>> import numpy as np
