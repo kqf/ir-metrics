@@ -6,17 +6,20 @@ from irmetrics.relevance import multilabel, relevant_counts
 def coverage(y_pred, padding=None):
     """Compute Coverage(s)
     Check if ``y_pred`` contains any nontrivial results.
+
     Parameters
     ----------
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
     padding : scalar, str, default=None
         The value that was used to pad the predictions to get the same length.
+
     Returns
     -------
     coverage : int in [0, 1]
         The coverage is 1 if ``y_pred`` contains any results different from
                 ``padding`` and 0 otherwise.
+
     Examples
     --------
     >>> from irmetrics.topk import rr
@@ -45,6 +48,7 @@ def iou(y_true, y_pred, k=None, relevance=multilabel, n_uniq=relevant_counts):
     """Compute the approximate version of Intersection over Union.
     The approximation comes in assumption that `y_true` and `y_pred`
     contain only unique values.
+
     Parameters
     ----------
     y_true : scalar, iterable or ndarray of shape (n_samples, n_labels)
@@ -64,6 +68,7 @@ def iou(y_true, y_pred, k=None, relevance=multilabel, n_uniq=relevant_counts):
     iou : float in [0., 1.]
         The ratio of relevant retrieved entries to the union of relevant
         and retrieved entries.
+
     References
     ----------
     `Wikipedia entry for Jaccard Index
