@@ -107,7 +107,7 @@ def precision(y_true, y_pred=None, k=None, relevance=multilabel):
     """Compute Recall(s).
     and 1 otherwise.
     Check which fraction of ``y_pred`` is in ``y_true``.
-    **NB**: When passing ``y_pred` of shape `[n_samples, n_outputs]`
+    **NB**: When passing ``y_pred`` of shape `[n_samples, n_outputs]`
     the result is quivalent to `recall(y_pred, y_true) / n_outputs`.
 
     Parameters
