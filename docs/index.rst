@@ -14,6 +14,7 @@ This part of the documentation shows the inteded ways to use the package.
 
    basic
    relevance
+   pandas
 
 
 API Reference
