@@ -19,7 +19,7 @@ extensions = [
     "numpydoc",
 ]
 intersphinx_mapping = {"python": ("https://docs.python.org/3/", None)}
-issues_github_path = "pallets/ir-metrics"
+issues_github_path = "kqf/ir-metrics"
 
 # HTML
 html_theme = "flask"
@@ -28,7 +28,7 @@ html_context = {
     "project_links": [
         ProjectLink("Website", "https://google.com/#q=ir-metrics"),
         ProjectLink("PyPI releases", "https://pypi.org/project/ir-metrics/"),
-        ProjectLink("Source Code", "https://github.com/pallets/ir-metrics/"),
+        ProjectLink("Source Code", "https://github.com/kqf/ir-metrics/"),
         ProjectLink("Issues", "https://github.com/kqf/ir-metrics/issues/"),
     ]
 }
