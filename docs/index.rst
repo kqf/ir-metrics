@@ -13,6 +13,7 @@ This part of the documentation shows the inteded ways to use the package.
    :maxdepth: 2
 
    basic
+   relevance
 
 
 API Reference
