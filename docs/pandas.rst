@@ -20,15 +20,15 @@ The metrics are designed to work also with `pandas` dataframes:
     0.5
 
 Note that `np.vstack` is required here to convert `y_pred` to matrix.
-Quite often data is represented in long (or flat format) and only relevance judgements provided for each entry.
-There is a dedicated `irmetrics.flat` created for that:
+Quite often data is represented in long (or flat) format and only relevance judgements provided for each entry.
+There is a dedicated `irmetrics.flat` module created for that:
 
 .. code:: python
 
     >>> import numpy as np
     >>> import pandas as pd
     >>> from irmetrics.flat import flat
-    >>> # Example data
+    >>> # example data
     >>> df = pd.DataFrame({
     ...    "click": [0, 1, 0, 1, 0, 0],
     ...    "label": ["banana", "apple", "grapes", "bob", "rob", "don"],
@@ -48,5 +48,4 @@ There is a dedicated `irmetrics.flat` created for that:
     1    1.0
     Name: click, dtype: float64
 
-In the example above, "label" column is provided just for illustration purposes and is not used for calculations.
-Currently `ir-metrics` defines only `ndcg` and `rr` measures that are compatible with flat format.
+In the example above, "label" column is provided just for illustration purposes and is ignored. Currently `ir-metrics` defines only `ndcg` and `rr` measures that are compatible with flat format.
