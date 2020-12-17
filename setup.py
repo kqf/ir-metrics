@@ -35,7 +35,7 @@ setup(
         "numpy",
     ],
     extras_require={
-        # Didn"t come up with a better name
+        # Didn't come up with a better name
         "pandas": ["pandas"],
     },
 )
