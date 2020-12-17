@@ -30,6 +30,7 @@ setup(
         "Topic :: Software Development",
         "Topic :: Scientific/Engineering",
     ],
+    python_requires=">=3.6, <4",
     install_requires=[
         "numpy",
     ],

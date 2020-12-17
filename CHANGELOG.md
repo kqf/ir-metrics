@@ -8,6 +8,7 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 ### Changed
 - Fixed the docstrings
 - Removed the unused parameters from top-k metrics
+- Update the package metadata
 
 
 ## Changes in v0.1.1
