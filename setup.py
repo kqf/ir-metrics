@@ -18,12 +18,17 @@ setup(
     packages=find_packages(),
     classifiers=[  # Optional
         "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Intended Audience :: Science/Research",
+        "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3 :: Only",
+        "Topic :: Software Development",
+        "Topic :: Scientific/Engineering",
     ],
     install_requires=[
         "numpy",
