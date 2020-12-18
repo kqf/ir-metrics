@@ -5,6 +5,9 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ## Changes in v0.1.2
 
+### Added
+- Tests (support) for multiple python3 versions
+
 ### Changed
 - Fixed the docstrings
 - Removed the unused parameters from top-k metrics
