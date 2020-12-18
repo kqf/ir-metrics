@@ -1,0 +1,10 @@
+include LICENSE.md CHANGELOG.md README.rst traivs.yml requirements.txt
+
+# Tests
+include tox.ini .coveragerc conftest.py
+recursive-include tests *.py
+
+# Documentation
+include docs/Makefile docs/conf.py
+recursive-include docs *.rst
+prune docs/_build
