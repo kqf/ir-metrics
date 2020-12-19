@@ -26,7 +26,7 @@ html_theme = "flask"
 html_theme_options = {"index_sidebar_logo": False}
 html_context = {
     "project_links": [
-        ProjectLink("Website", "https://google.com/#q=ir-metrics"),
+        ProjectLink("Website", "https://ir-metrics.readthedocs.io"),
         ProjectLink("PyPI releases", "https://pypi.org/project/ir-metrics/"),
         ProjectLink("Source Code", "https://github.com/kqf/ir-metrics/"),
         ProjectLink("Issues", "https://github.com/kqf/ir-metrics/issues/"),

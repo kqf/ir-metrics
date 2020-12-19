@@ -7,7 +7,7 @@ Welcome to `ir-metrics`
 Documentation
 -------------
 
-This part of the documentation shows the inteded ways to use the package.
+This part of the documentation shows the intended ways to use the package.
 
 .. include:: basic.rst
 .. include:: relevance.rst
