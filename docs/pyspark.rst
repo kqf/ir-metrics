@@ -1,6 +1,6 @@
-===================
+====================
 Using with `pyspark`
-===================
+====================
 
 The metrics are designed to work also with `pyspark` dataframes:
 
@@ -23,7 +23,7 @@ The metrics are designed to work also with `pyspark` dataframes:
     >>> # Create spark datasets
     >>> spark = SQLContext(SparkContext())
     >>> sdf = spark.createDataFrame(df)
-    >>> # apply the metics
+    >>> # apply the metrics
     >>> sdf.withColumn("rr", F.udf(rr)("y_true", "y_pred")).show(5, False)
     +------+-----------------------+---+
     |y_true|y_pred                 |rr |
@@ -36,3 +36,5 @@ The metrics are designed to work also with `pyspark` dataframes:
     +------+-----------------------+---+
     only showing top 5 rows
     <BLANKLINE>
+
+Please note that `ir-metrics` should be installed at all workers in your cluster. Similarly, the flat module should also work with `pandas UDFs <https://spark.apache.org/docs/latest/sql-pyspark-pandas-with-arrow.html#pandas-udfs-aka-vectorized-udfs>`_.
