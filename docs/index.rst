@@ -9,13 +9,10 @@ Documentation
 
 This part of the documentation shows the inteded ways to use the package.
 
-.. toctree::
-   :maxdepth: 2
-
-   basic
-   relevance
-   pandas
-   pyspark
+.. include:: basic.rst
+.. include:: relevance.rst
+.. include:: pandas.rst
+.. include:: pyspark.rst
 
 
 API Reference
