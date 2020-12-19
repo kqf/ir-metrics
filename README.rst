@@ -1,5 +1,5 @@
-ir-metrics |build| |downloads|
-------------------------------
+ir-metrics |build| |docs| |downloads|
+-------------------------------------
 .. |build| image:: https://travis-ci.com/kqf/ir-metrics.svg?branch=master
     :alt: Build Status
     :scale: 100%
@@ -9,6 +9,11 @@ ir-metrics |build| |downloads|
     :alt: PyPi downloads
     :scale: 100%
     :target: https://img.shields.io/pypi/dm/ir-metrics
+
+.. |docs| image:: https://readthedocs.org/projects/ir-metrics/badge/?version=latest
+    :alt: Documentation Status
+    :scale: 100%
+    :target: https://ir-metrics.readthedocs.io/?badge=latest
 
 A set of the most common metrics in used in information retrieval.
 
@@ -40,6 +45,8 @@ The same function works also for the matrix-like structures:
     >>> # Calculate the standard deviation for Reciprocal Ranks
     >>> rr(y_trues, y_preds).std()
     0.0
+
+Check the `docs <https://ir-metrics.readthedocs.io>`_ for more examples.
 
 ============
 Installation
