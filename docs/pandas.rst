@@ -32,7 +32,8 @@ There is a dedicated `irmetrics.flat` module created for that:
     >>> df = pd.DataFrame({
     ...    "click": [0, 1, 0, 1, 0, 0],
     ...    "label": ["banana", "apple", "grapes", "bob", "rob", "don"],
-    ...    "query_id": [0, 0, 0, 1, 1, 1]})
+    ...    "query_id": [0, 0, 0, 1, 1, 1]
+    ... })
     >>> df
        click   label  query_id
     0      0  banana         0

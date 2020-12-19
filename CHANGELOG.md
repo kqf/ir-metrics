@@ -7,6 +7,7 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ### Added
 - Tests (support) for multiple python3 versions
+- `pyspark` example
 
 ### Changed
 - Fixed the docstrings

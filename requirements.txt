@@ -12,3 +12,4 @@ sphinx-tabs
 numpydoc
 tox
 check-manifest
+pyspark
