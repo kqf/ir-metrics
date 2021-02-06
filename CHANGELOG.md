@@ -10,6 +10,7 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ### Changed
 - The default build system
+- Explicit padding support
 
 
 ## Changes in v0.1.2
