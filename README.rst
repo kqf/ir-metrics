@@ -1,9 +1,10 @@
 ir-metrics |build| |docs| |downloads|
 -------------------------------------
-.. |build| image:: https://travis-ci.com/kqf/ir-metrics.svg?branch=master
+.. |build| image:: https://github.com/kqf/ir-metrics/workflows/tests/badge.svg?branch=master
     :alt: Build Status
     :scale: 100%
     :target: https://travis-ci.com/kqf/ir-metrics
+    ![tests]()
 
 .. |downloads| image:: https://img.shields.io/pypi/dm/ir-metrics
     :alt: PyPi downloads
