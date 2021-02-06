@@ -18,7 +18,7 @@ def cases(inputs, expected, exceptions):
     ap,
 ])
 @pytest.mark.parametrize("relevance", [
-    # unilabel,
+    unilabel,
     multilabel,
 ])
 def test_all(cases, measure, relevance):
@@ -38,7 +38,7 @@ def test_all(cases, measure, relevance):
     ap,
 ])
 @pytest.mark.parametrize("relevance", [
-    # unilabel,
+    unilabel,
     multilabel,
 ])
 def test_all_vectorized(cases, measure, relevance, n_samples=128):
