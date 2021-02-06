@@ -54,7 +54,7 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
 
 
 @_ensure_io
-def recall(y_true, y_pred=None, k=None, relevance=multilabel):
+def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_symbol=None):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
@@ -99,7 +99,8 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel):
     >>> recall(y_true, y_pred)
     1.0
     """
-    return relevance(y_true, y_pred).any(-1) / y_true.shape[-1]
+    positives = ~np.equal(y_true, pad_symbol)
+    return relevance(y_true, y_pred).any(-1) / positives.sum(-1)
 
 
 @_ensure_io
