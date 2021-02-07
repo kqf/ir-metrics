@@ -13,14 +13,14 @@ def does_not_raise():
 @pytest.fixture
 def inputs():
     return [
-        (1, [1, 0, 0]),
-        (1, [0, 1, 0]),
-        (1, [0, 0, 1]),
-        (1, [1, 1, 1]),
-        (1, [0, 0, 0]),
+        (1, [1, 2, 3]),
+        (1, [2, 1, 3]),
+        (1, [2, 3, 1]),
+        (1, [1, 2, 3]),
+        (1, [np.nan, np.nan, np.nan]),
         (1, [0, 0, 0]),
         ("item1", ["item1", "item2", "item3"]),
-        ("item1", ["item1", None, None]),
+        ("item1", ["item1", np.nan, np.nan]),
         # (1, [1, None, None]),
     ]
 
