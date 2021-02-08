@@ -50,7 +50,7 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
     """
     relevant = relevance(y_true, y_pred)
     index = relevant.argmax(-1)
-    return relevant.sum(-1) / (index + 1)
+    return relevant.any(-1) / (index + 1)
 
 
 @_ensure_io
