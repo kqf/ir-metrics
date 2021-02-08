@@ -18,9 +18,9 @@ def inputs():
         (1, [2, 3, 1]),
         (1, [1, 2, 3]),
         (1, [np.nan, np.nan, np.nan]),
-        (1, [0, 0, 0]),
+        (1, [8, 9, 10]),  # all irrelevant
         ("item1", ["item1", "item2", "item3"]),
-        ("item1", ["item1", np.nan, np.nan]),
+        ("item1", ["item1", np.nan, np.nan]),  # noqa, raises as nans are converted to str
         # (1, [1, None, None]),
     ]
 
