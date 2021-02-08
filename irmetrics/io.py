@@ -33,7 +33,7 @@ def _validate_unique(f):
         if np.any(repeat_count > 1):
             message = (
                 "Repeated predictions detected. "
-                "his is an error unless the predictions are padded. "
+                "This is an error unless the predictions are padded. "
                 "Use np.nan as a padding token to suppress the warning for "
                 "integer labels."
             )
