@@ -1,4 +1,6 @@
 import numpy as np
+import warnings
+
 from functools import wraps
 from irmetrics.relevance import multilabel
 
@@ -21,7 +23,25 @@ def ensure_inputs(y_true, y_pred, k=None):
     # Take at most k labels
     y_true = y_true[:, :k]
     y_pred = y_pred[:, :k]
+
     return y_true, y_pred
+
+
+def _validate_unique(f):
+    @wraps(f)
+    def wrapper(y_true, y_pred, k=None, relevance=multilabel, **kwargs):
+        repeat_count = (y_pred[:, :, None] == y_pred[:, None]).sum(axis=-1)
+        if np.any(repeat_count > 1):
+            message = (
+                "Repeated predictions detected. "
+                "his is an error unless the predictions are padded. "
+                "Use np.nan as a padding token to suppress the warning for "
+                "integer labels."
+            )
+            warnings.warn(message, RuntimeWarning)
+        return f(y_true, y_pred, k, relevance=relevance, **kwargs)
+
+    return wrapper
 
 
 def _ensure_io(f):
