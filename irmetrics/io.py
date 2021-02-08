@@ -1,5 +1,5 @@
-import numpy as np
 import warnings
+import numpy as np
 
 from functools import wraps
 from irmetrics.relevance import multilabel
@@ -23,7 +23,6 @@ def ensure_inputs(y_true, y_pred, k=None):
     # Take at most k labels
     y_true = y_true[:, :k]
     y_pred = y_pred[:, :k]
-
     return y_true, y_pred
 
 

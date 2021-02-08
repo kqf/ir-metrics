@@ -5,6 +5,9 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 
 ## Changes in v0.1.4
 
+### Added
+- A warning message for duplicate inputs
+
 ### Changed
 - Duplicates in `y_pred` for `topk` metrics are no longer supported
 
