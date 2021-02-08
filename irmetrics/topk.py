@@ -100,7 +100,7 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_symbol=None):
     1.0
     """
     positives = ~np.equal(y_true, pad_symbol)
-    return relevance(y_true, y_pred).any(-1) / positives.sum(-1)
+    return relevance(y_true, y_pred).sum(-1) / positives.sum(-1)
 
 
 @_ensure_io
@@ -149,7 +149,7 @@ def precision(y_true, y_pred=None, k=None, relevance=multilabel):
     >>> precision(y_true, y_pred)
     0.25
     """
-    return relevance(y_true, y_pred).any(-1) / y_pred.shape[-1]
+    return relevance(y_true, y_pred).sum(-1) / y_pred.shape[-1]
 
 
 def dcg_score(relevance, k=None, weights=1.0):
