@@ -76,6 +76,11 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_symbol=None):
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
+    pad_symbol : callable, default=None
+        A value that was used to pad the `y_true`. This is needed to ignore
+        the padding when calculating the recall. The default value is `None`,
+        this means `numpy` will do element-wise comparison for `None`, change
+        it to somehting else if your predictions may contain `None` objects.
 
     Returns
     -------
