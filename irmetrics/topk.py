@@ -79,7 +79,7 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_symbol=None):
 
     Returns
     -------
-    rr : bool in [True, False]
+    rr : float in [0, 1]
         The relevances for all samples.
 
     References
@@ -130,7 +130,7 @@ def precision(y_true, y_pred=None, k=None, relevance=multilabel):
 
     Returns
     -------
-    rr : bool in [True, False]
+    rr : float in [0, 1]
         The relevances for all samples.
 
     References
