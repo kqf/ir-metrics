@@ -106,7 +106,8 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_token=None):
     >>> recall(y_true, y_pred)
     1.0
     """
-    positives = ~np.equal(y_true, pad_token)
+    # This performes element-wise comparison if dtypes agree
+    positives = ~(y_true == pad_token)
     return relevance(y_true, y_pred).sum(-1) / positives.sum(-1)
 
 
