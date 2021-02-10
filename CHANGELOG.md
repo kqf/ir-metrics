@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Changes in v0.1.4
+## Changes in v0.1.5
 
 ### Fixed
 - Inconsistent naming conventions for `y_pred` padding 
