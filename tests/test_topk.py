@@ -60,15 +60,19 @@ def test_all_vectorized(cases, measure, relevance, n_samples=128):
 @pytest.mark.parametrize("relevance", [
     multilabel,
 ])
-@pytest.mark.parametrize("pad_symbol", [
+@pytest.mark.parametrize("pad_token", [
     None,
 ])
-def test_recall_padding(cases, measure, relevance, pad_symbol):
+def test_recall_padding(cases, measure, relevance, pad_token):
     for (y_true, y_pred), expected, exception in cases:
-        y_true = [y_true, pad_symbol]
+        y_true = [y_true, pad_token]
         with exception():
             np.testing.assert_equal(
-                measure(y_true, y_pred,
-                        relevance=relevance, pad_symbol=pad_symbol),
+                measure(
+                    y_true,
+                    y_pred,
+                    relevance=relevance,
+                    pad_token=pad_token
+                ),
                 expected
             )

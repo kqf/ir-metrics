@@ -56,7 +56,7 @@ def rr(y_true, y_pred, k=None, relevance=multilabel):
 
 @_ensure_io
 @_validate_unique
-def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_symbol=None):
+def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_token=None):
     """Compute Recall(s).
     Check if at least one metric proposed in ``y_pred`` is in ``y_true``.
     This is the binary score, 0 -- all predictionss are irrelevant
@@ -76,7 +76,7 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_symbol=None):
     relevance : callable, default=topk.relevance.multilabel
         A function that calculates relevance judgements based on input
         ``y_pred`` and ``y_true``.
-    pad_symbol : callable, default=None
+    pad_token : callable, default=None
         A value that was used to pad the `y_true`. This is needed to ignore
         the padding when calculating the recall. The default value is `None`,
         this means `numpy` will do element-wise comparison for `None`, change
@@ -106,7 +106,7 @@ def recall(y_true, y_pred=None, k=None, relevance=multilabel, pad_symbol=None):
     >>> recall(y_true, y_pred)
     1.0
     """
-    positives = ~np.equal(y_true, pad_symbol)
+    positives = ~np.equal(y_true, pad_token)
     return relevance(y_true, y_pred).sum(-1) / positives.sum(-1)
 
 
