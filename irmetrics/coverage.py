@@ -3,7 +3,7 @@ from irmetrics.io import to_scalar, _ensure_io
 from irmetrics.relevance import multilabel, relevant_counts
 
 
-def coverage(y_pred, padding=None):
+def coverage(y_pred, pad_token=None):
     """Compute Coverage(s)
     Check if ``y_pred`` contains any nontrivial results.
 
@@ -11,14 +11,14 @@ def coverage(y_pred, padding=None):
     ----------
     y_pred : iterable, ndarray of shape (n_samples, n_labels)
         Target labels sorted by relevance (as returned by an IR system).
-    padding : scalar, str, default=None
+    pad_token : scalar, str, default=None
         The value that was used to pad the predictions to get the same length.
 
     Returns
     -------
     coverage : int in [0, 1]
         The coverage is 1 if ``y_pred`` contains any results different from
-                ``padding`` and 0 otherwise.
+                ``pad_token`` and 0 otherwise.
 
     Examples
     --------
@@ -36,10 +36,10 @@ def coverage(y_pred, padding=None):
     >>> y_pred = [0, None]
     >>> coverage(y_true)
     1
-    >>> coverage([-1], padding=-1)
+    >>> coverage([-1], pad_token=-1)
     0
     """
-    outputs = np.not_equal(y_pred, padding).sum(axis=-1) > 0
+    outputs = np.not_equal(y_pred, pad_token).sum(axis=-1) > 0
     return to_scalar(outputs.astype(np.int32))
 
 
