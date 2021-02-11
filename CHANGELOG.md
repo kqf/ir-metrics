@@ -6,6 +6,12 @@ the entire project sticks to [Semantic Versioning](https://semver.org/spec/v2.0.
 ## Changes in v0.1.5
 
 ### Fixed
+- Fix string padding for recall
+
+
+## Changes in v0.1.5
+
+### Fixed
 - Inconsistent naming conventions for `y_pred` padding 
 
 
